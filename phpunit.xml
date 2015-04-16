@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<phpunit
+    backupGlobals               = "false"
+    backupStaticAttributes      = "false"
+    bootstrap                   = "vendor/autoload.php"
+    colors                      = "true"
+    convertErrorsToExceptions   = "true"
+    convertNoticesToExceptions  = "true"
+    convertWarningsToExceptions = "true"
+    processIsolation            = "true"
+    stopOnFailure               = "false"
+    syntaxCheck                 = "true"
+    verbose                     = "false"
+    testDox                     = "false"
+>
+    <testsuites>
+        <testsuite name="full">
+            <directory suffix="Test.php">./tests</directory>
+        </testsuite>
+        <testsuite name="instance">
+            <directory suffix="InstanceTest.php">./tests</directory>
+        </testsuite>
+    </testsuites>
+
+    <filter>
+        <blacklist>
+            <directory suffix=".php">./tests</directory>
+            <directory suffix=".php">vendor</directory>
+            <file>src/Channel.template.php</file>
+        </blacklist>
+    </filter>
+
+    <logging>
+        <log type="coverage-html" target="coverage" lowUpperBound="50" highLowerBound="90"/>
+        <log type="testdox-html" target="coverage/testdox.html"/>
+    </logging>
+
+</phpunit>

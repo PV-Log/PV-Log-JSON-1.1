@@ -1,0 +1,10 @@
+/makedoc.sh
+/coverage
+/vendor
+
+composer.lock
+release.sh
+
+HowToAddNewProperty.md
+
+Channel.php.tpl

@@ -1,0 +1,465 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+
+  <title>Class PVLog\Classes\Json\Helper | PV-Log JSON 1.1</title>
+
+  <link rel="stylesheet" href="resources/style.css?d1af3ec9229169df4def178a40a0745594b79c4d">
+
+  <link rel="shortcut icon" href="data:image/png;base64,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" type="image/x-icon">
+
+</head>
+
+<body>
+<div id="left">
+  <div id="menu">
+    <a href="index.html" title="Overview"><span>Overview</span></a>
+
+
+    <div id="groups">
+        <h3>Namespaces</h3>
+      <ul>
+        <li class="active">
+          <a href="namespace-PVLog.html">
+            PVLog<span></span>
+          </a>
+
+            <ul>
+        <li class="active">
+          <a href="namespace-PVLog.Classes.html">
+            Classes<span></span>
+          </a>
+
+            <ul>
+        <li class="active">
+          <a href="namespace-PVLog.Classes.Json.html">
+            Json          </a>
+
+            </li>
+              </ul></li></ul></li>
+      </ul>
+    </div>
+
+    <hr>
+
+
+    <div id="elements">
+      <h3>Classes</h3>
+      <ul>
+        <li><a href="class-PVLog.Classes.Json.EnergyMeter.html">EnergyMeter</a></li>
+        <li><a href="class-PVLog.Classes.Json.FeedIn.html">FeedIn</a></li>
+        <li><a href="class-PVLog.Classes.Json.GridConsumption.html">GridConsumption</a></li>
+        <li class="active"><a href="class-PVLog.Classes.Json.Helper.html">Helper</a></li>
+        <li><a href="class-PVLog.Classes.Json.Instance.html">Instance</a></li>
+        <li><a href="class-PVLog.Classes.Json.Inverter.html">Inverter</a></li>
+        <li><a href="class-PVLog.Classes.Json.Irradiation.html">Irradiation</a></li>
+        <li><a href="class-PVLog.Classes.Json.Json.html">Json</a></li>
+        <li><a href="class-PVLog.Classes.Json.Plant.html">Plant</a></li>
+        <li><a href="class-PVLog.Classes.Json.PowerSensor.html">PowerSensor</a></li>
+        <li><a href="class-PVLog.Classes.Json.Properties.html">Properties</a></li>
+        <li><a href="class-PVLog.Classes.Json.SelfConsumption.html">SelfConsumption</a></li>
+        <li><a href="class-PVLog.Classes.Json.Set.html">Set</a></li>
+        <li><a href="class-PVLog.Classes.Json.Strings.html">Strings</a></li>
+        <li><a href="class-PVLog.Classes.Json.Temperature.html">Temperature</a></li>
+        <li><a href="class-PVLog.Classes.Json.TotalConsumption.html">TotalConsumption</a></li>
+      </ul>
+
+
+
+
+
+    </div>
+  </div>
+</div>
+
+<div id="splitter"></div>
+
+<div id="right">
+<div id="rightInner">
+  <form id="search">
+    <input type="hidden" name="cx" value="">
+    <input type="hidden" name="ie" value="UTF-8">
+    <input type="text" name="q" class="text" placeholder="Search">
+  </form>
+
+  <div id="navigation">
+    <ul>
+      <li>
+        <a href="index.html" title="Overview"><span>Overview</span></a>
+      </li>
+      <li>
+        <a href="namespace-PVLog.Classes.Json.html" title="Summary of PVLog\Classes\Json"><span>Namespace</span></a>
+      </li>
+      <li class="active">
+<span>Class</span>      </li>
+    </ul>
+    <ul>
+      <li>
+        <a href="tree.html" title="Tree view of classes, interfaces, traits and exceptions"><span>Tree</span></a>
+      </li>
+        <li>
+          <a href="annotation-group-todo.html" title="List of elements with todo annotation">
+            <span>Todo</span>
+          </a>
+        </li>
+    </ul>
+    <ul>
+      <li>
+        <a href="-API-documentation.zip" title="Download documentation as ZIP archive"><span>Download</span></a>
+      </li>
+    </ul>
+  </div>
+
+<div id="content" class="class">
+	<h1>Class Helper</h1>
+
+
+	<div class="description">
+	<p>Helper class</p>
+	</div>
+
+
+
+
+
+
+
+
+
+	<div class="info">
+		<b>Abstract</b><br>
+		
+		<b>Namespace:</b> <a href="namespace-PVLog.html">PVLog</a>\<a href="namespace-PVLog.Classes.html">Classes</a>\<a href="namespace-PVLog.Classes.Json.html">Json</a><br>
+		
+
+				<b>License:</b>
+				<a href="http://opensource.org/licenses/MIT">MIT License (MIT)</a><br>
+				<b>Author:</b>
+				Knut Kohl <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#107;&#x6f;&#104;&#108;&#x40;&#116;&#111;&#x70;&#53;0&#x2d;&#115;&#x6f;&#x6c;&#97;&#x72;&#x2e;&#100;&#x65;">&#107;&#x6f;&#104;&#108;&#x40;&#116;&#111;&#x70;&#53;0&#x2d;&#115;&#x6f;&#x6c;&#97;&#x72;&#x2e;&#100;&#x65;</a><br>
+				<b>Version:</b>
+				PVLog JSON 1.1<br>
+				<b>Since:</b>
+				2015-03-14<br>
+				<b>Since:</b>
+				v1.0.0<br>
+			<b>Located at</b> <a href="source-class-PVLog.Classes.Json.Helper.html#17-186" title="Go to source code">Classes/Json/Helper.php</a>
+		<br>
+	</div>
+
+
+
+	<table class="summary methods" id="methods">
+	<caption>Methods summary</caption>
+	<tr data-order="setDateFormatMinutes" id="_setDateFormatMinutes">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDateFormatMinutes">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Helper.html#32-39" title="Go to source code">setDateFormatMinutes</a>( )</code>
+
+		<div class="description short">
+			<p>Set date format for "minutes" file output</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set date format for "minutes" file output</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setDateFormatDay" id="_setDateFormatDay">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDateFormatDay">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Helper.html#41-48" title="Go to source code">setDateFormatDay</a>( )</code>
+
+		<div class="description short">
+			<p>Set date format for "day" file output</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set date format for "day" file output</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setDateFormatMonth" id="_setDateFormatMonth">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setDateFormatMonth">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Helper.html#50-58" title="Go to source code">setDateFormatMonth</a>( )</code>
+
+		<div class="description short">
+			<p>Set date format for "month" file output</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set date format for "month" file output</p>
+
+
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getDateFormat" id="_getDateFormat">
+
+		<td class="attributes"><code>
+			 public static
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getDateFormat">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Helper.html#60-67" title="Go to source code">getDateFormat</a>( )</code>
+
+		<div class="description short">
+			<p>Set date format for output</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set date format for output</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					string
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="setTimestampOffset" id="_setTimestampOffset">
+
+		<td class="attributes"><code>
+			 public static
+
+			
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_setTimestampOffset">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Helper.html#69-77" title="Go to source code">setTimestampOffset</a>( <span>float <var>$value</var></span> )</code>
+
+		<div class="description short">
+			<p>Set timestamp offset to consider for output</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Set timestamp offset to consider for output</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd>Offset in hours</dd>
+				</dl></div>
+
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="getTimestampOffset" id="_getTimestampOffset">
+
+		<td class="attributes"><code>
+			 public static
+
+			float
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_getTimestampOffset">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Helper.html#79-86" title="Go to source code">getTimestampOffset</a>( )</code>
+
+		<div class="description short">
+			<p>Get timestamp offset to consider for output</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Get timestamp offset to consider for output</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					float
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="localTimestamp" id="_localTimestamp">
+
+		<td class="attributes"><code>
+			 public static
+
+			string
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_localTimestamp">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Helper.html#88-106" title="Go to source code">localTimestamp</a>( <span>string|integer <var>$timestamp</var></span> )</code>
+
+		<div class="description short">
+			<p>Convert an timestamp into local time,</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Convert an timestamp into local time,</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$timestamp</var></dt>
+					<dd>Date &amp; time or timestamp</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					string<br>Y-m-d H:i:s
+				</div>
+
+
+				<h4>Example</h4>
+				<div class="list">
+						<ul>
+<li>Your timestamps are in UTC</li>
+<li>Your local timezone is MET/MEST</li>
+<li>Set offset to 1 hour (2 hours during daylight saving time)
+<code>\PVLog\Classes\JSON\Helper::setTimestampOffset(1);</code></li>
+</ul><br>
+				</div>
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="convertFahrenheitToCelsius" id="_convertFahrenheitToCelsius">
+
+		<td class="attributes"><code>
+			 public static
+
+			float|array
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_convertFahrenheitToCelsius">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Helper.html#108-126" title="Go to source code">convertFahrenheitToCelsius</a>( <span>float|array <var>$value</var></span> )</code>
+
+		<div class="description short">
+			<p>Converts degree Fahrenheit to degree Celsius</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Converts degree Fahrenheit to degree Celsius</p>
+
+<p>Source: http://de.wikipedia.org/wiki/Grad_Fahrenheit</p>
+
+
+				<h4>Parameters</h4>
+				<div class="list"><dl>
+					<dt><var>$value</var></dt>
+					<dd>Temperature in degree fahrenheit</dd>
+				</dl></div>
+
+				<h4>Returns</h4>
+				<div class="list">
+					float|array<br>Temperature in degree celsius
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	</table>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+  <div id="footer">
+    PV-Log JSON 1.1 API documentation generated by <a href="http://apigen.org">ApiGen</a>
+  </div>
+</div>
+</div>
+<script src="resources/combined.js"></script>
+<script src="elementlist.js"></script>
+</body>
+</html>

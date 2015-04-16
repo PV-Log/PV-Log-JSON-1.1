@@ -1,0 +1,29 @@
+{
+    "name":        "pv-log/json11",
+    "description": "PV-Log JSON 1.1 generator classes",
+    "license":     "MIT",
+    "keywords":    ["JSON","PV-Log","API"],
+    "authors": [
+        {
+            "name":  "Knut Kohl",
+            "email": "kohl@top50-solar.de"
+        }
+    ],
+    "prefer-stable": true,
+    "require": {
+        "php": ">=5.3.0",
+        "ext-json": "*"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "*",
+        "phpunit/php-invoker": "*",
+        "apigen/apigen": "*",
+        "phpdocumentor/phpdocumentor": "*"
+    },
+    "autoload": {
+        "psr-4": {
+            "PVLog\\": "src",
+            "PVLog\\Json\\Tests\\": "tests"
+        }
+    }
+}
