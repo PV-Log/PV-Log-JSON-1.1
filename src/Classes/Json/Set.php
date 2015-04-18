@@ -276,7 +276,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator {
             // Buffer datetime format :-)
             $format = Helper::getDateFormat();
             foreach ($this->data as $timestamp=>$value) {
-                $data[date($format, $timestamp)] = round($value);
+                $data[date($format, $timestamp)] = (int)$value;
             }
         } else {
             // Return data as is

@@ -151,7 +151,7 @@ abstract class EnergyMeter extends PowerSensor {
                 // day or month file, no power values
                 unset($result[Properties::POWER]);
                 // Minutes file, round energies
-                $result[Properties::ENERGY] = array_map('round', $result[Properties::ENERGY]);
+                $result[Properties::ENERGY] = array_map('intval', $result[Properties::ENERGY]);
             }
         }
 
