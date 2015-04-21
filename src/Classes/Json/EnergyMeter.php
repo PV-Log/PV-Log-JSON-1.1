@@ -33,12 +33,22 @@ abstract class EnergyMeter extends PowerSensor {
     /**
      * Class constructor
      *
+     * @todo 2.0 - $this->data['lifetime'] = 0;
+     *
      * @param array $data Data to build from
      */
     public function __construct( $data=array() ) {
         // Set the defaults
         // TODO 2.0: $this->data['lifetime'] = 0;
         $this->clearTotalWattHours();
+
+        if (isset($data[Properties::ENERGY]) && !is_array($data[Properties::ENERGY]) &&
+            isset($data[Properties::POWER]) && count($data[Properties::POWER])) {
+            // Build from minutes file, set timestamp of totalWattHours
+            // to last timestamp of powerAcWatts
+            $timestamps = array_keys($data[Properties::POWER]);
+            $data[Properties::ENERGY] = array(max($timestamps) => $data[Properties::ENERGY]);
+        }
 
         parent::__construct($data);
     }
