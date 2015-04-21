@@ -43,6 +43,7 @@ else
     echo Run full tests ...
     ### Clear out code coverage
     rm -rf $p/coverage/* >/dev/null 2>&1
+    echo '<h1>Just a moment please ...</h1>' >$p/coverage/index.html
 fi
 
 echo

@@ -43,7 +43,9 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator {
      */
     public function __construct( $data=array() ) {
         is_array($data) || $data = array('midnight' => $data);
-        parent::__construct($data);
+        foreach ($data as $key=>$value) {
+        	$this[$key] = $value;
+        }
     }
 
     /**
@@ -276,7 +278,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator {
             // Buffer datetime format :-)
             $format = Helper::getDateFormat();
             foreach ($this->data as $timestamp=>$value) {
-                $data[date($format, $timestamp)] = round($value);
+                $data[date($format, $timestamp)] = $value;
             }
         } else {
             // Return data as is

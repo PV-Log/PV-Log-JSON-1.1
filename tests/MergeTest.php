@@ -61,6 +61,38 @@ class MergeTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
+     *
+     */
+    public function testMergeSameInstances() {
+        $file = __DIR__.'/files/merge.minutes.json';
+        $json = json_decode(file_get_contents($file), TRUE);
+
+        $old = new Instance($json);
+        $new = new Instance($json);
+
+        // Merge with itself MUST NOT change anything
+        $old->merge($new);
+        $this->assertJsonStringEqualsJsonFile($file, $old->asJson(TRUE));
+    }
+
+    /**
+     *
+     */
+    public function testMergeInstanceWithFile() {
+        $plant = new Plant;
+        $plant->addTotalWattHours('2000-01-01 02:05:00', 3100);
+        $this->instance->setPlant($plant);
+
+        $file = __DIR__.'/files/merge.minutes.json';
+        $json = json_decode(file_get_contents($file), TRUE);
+        $old = new Instance($json);
+
+        $old->merge($this->instance);
+        $file = __DIR__.'/files/merge.minutes.new.json';
+        $this->assertJsonStringEqualsJsonFile($file, $old->asJson(TRUE));
+    }
+
+    /**
      * @expectedException InvalidArgumentException
      */
     public function testMergeInstancesDifferentVersionsFails() {

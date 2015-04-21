@@ -39,4 +39,24 @@ class SelfConsumption extends EnergyMeter {
         $instance->setSelfConsumption($this);
         return $this;
     }
+
+    /*
+     * Overloaded
+     *
+     * Remove leading 0 values in front of day
+     */
+    public function asArray( $flags=0 ) {
+        $result = parent::asArray($flags);
+
+        if ($flags & self::EXPORT_POWER) {
+            // Minutes file, round powers
+            foreach ($result[Properties::POWER] as $timestamp=>$value) {
+                // Break loop on 1st non 0 value
+                if ($value) break;
+                unset($result[Properties::POWER][$timestamp]);
+            }
+        }
+
+        return $result;
+    }
 }

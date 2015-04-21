@@ -2,6 +2,7 @@
 
 namespace PVLog\Json\Tests;
 
+use PVLog\Classes\Json\Json;
 use PVLog\Classes\Json\Instance;
 use PVLog\Classes\Json\Plant;
 use PVLog\Classes\Json\Inverter;
@@ -24,6 +25,13 @@ class InstanceTest extends \PHPUnit_Framework_TestCase {
         $this->instance->setPrettyJson(TRUE);
     }
 
+    /**
+     *
+     * /
+    public function testTestInstance() {
+        $file = __DIR__.'/files/test.json';
+        print_r((new Instance(json_decode(file_get_contents($file), TRUE)))->asArray(Json::DATETIME));
+    }
 
     /**
      *
