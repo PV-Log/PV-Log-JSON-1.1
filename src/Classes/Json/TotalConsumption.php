@@ -39,4 +39,5 @@ class TotalConsumption extends EnergyMeter {
         $instance->setTotalConsumption($this);
         return $this;
     }
+
 }

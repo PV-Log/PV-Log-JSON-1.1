@@ -39,4 +39,5 @@ class FeedIn extends EnergyMeter {
         $instance->setFeedIn($this);
         return $this;
     }
+
 }

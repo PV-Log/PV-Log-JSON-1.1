@@ -44,7 +44,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator {
     public function __construct( $data=array() ) {
         is_array($data) || $data = array('midnight' => $data);
         foreach ($data as $key=>$value) {
-        	$this[$key] = $value;
+            $this[$key] = $value;
         }
     }
 
@@ -283,6 +283,23 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator {
         } else {
             // Return data as is
             $data = $this->data;
+        }
+
+        if (!($flags & self::INTERNAL)) {
+            // Remove leading 0 values
+            foreach ($data as $timestamp=>$value) {
+                // Break loop on 1st non 0 value
+                if ($value) break;
+                unset($data[$timestamp]);
+            }
+
+            // Remove trailing 0 values
+            // Reverse array, it is easier to delete leading data
+            foreach (array_reverse($data, TRUE) as $timestamp=>$value) {
+                // Break loop on 1st non 0 value
+                if ($value) break;
+                unset($data[$timestamp]);
+            }
         }
 
         return $data;
