@@ -143,9 +143,9 @@ class Plant extends EnergyMeter {
     public function interpolate() {
         parent::interpolate();
 
-        // Accumulate inverter data down to here
-        $this->calcFromDataInverters(Properties::ENERGY);
-        $this->calcFromDataInverters(Properties::POWER);
+        // Accumulate data from inverters down to here
+        $this->calcFromDataInverters(Properties::POWER, FALSE);
+        $this->calcFromDataInverters(Properties::ENERGY, TRUE);
 
         return $this;
     }
@@ -167,27 +167,53 @@ class Plant extends EnergyMeter {
      * Calc power or energy section from inverters sums
      * @internal
      */
-    protected function calcFromDataInverters( $property ) {
-        if (!count($this->data[Properties::INVERTER])) return;
+    protected function calcFromDataInverters( $property, $energy ) {
+        $inverterCount = count($this->data[Properties::INVERTER]);
+        if (!$inverterCount) return;
 
         // Remember RAW DATA to re-apply later!
-        // Without asArray() we would get a pointer
+        // Assume here correct prefilled data!!
+        // (without asArray() we would get a pointer to the instance)
         $save = $this->data[$property]->asArray();
 
-        foreach ($this->data[Properties::INVERTER] as $inverter) {
-            foreach ($inverter->get($property) as $timestamp=>$value) {
-                if (!isset($this->data[$property][$timestamp])) {
-                    // 1st value for this timestamp
-                    $this->data[$property][$timestamp] = $value;
-                } else {
-                    $this->data[$property][$timestamp] += $value;
+        if ($inverterCount == 1) {
+            // Take data from 1st inverter 1:1
+            $this->data[$property] = clone $this->data[Properties::INVERTER][0]->get($property);
+        } else {
+            // Combine all inverter data
+            // Fin max. timestamp for energy data
+            if ($energy) {
+                $maxTimestamp = 0;
+                foreach ($this->data[Properties::INVERTER] as $inverter) {
+                    $maxTimestamp = max($maxTimestamp, max(array_keys($inverter->get($property)->asArray(Json::INTERNAL))));
                 }
             }
-        }
+
+            foreach ($this->data[Properties::INVERTER] as $inverter) {
+                foreach ($inverter->get($property) as $timestamp=>$value) {
+                    if (!isset($this->data[$property][$timestamp])) {
+                        // 1st value for this timestamp
+                        $this->data[$property][$timestamp] = $value;
+                    } else {
+                        $this->data[$property][$timestamp] += $value;
+                    }
+                }
+                if ($energy) {
+                    $last = $this->data[$property][$timestamp];
+                    while ($timestamp < $maxTimestamp) {
+                        $timestamp += 300;
+                        $this->data[$property][$timestamp] += $value;
+                    }
+                }
+            }
+        } 
 
         // Merge given data over calculated data!
         foreach ($save as $timestamp=>$value) {
             $this->data[$property][$timestamp] = $value;
         }
+
+        // Sort by timestamp
+        $this->data[$property]->sort();
     }
 }

@@ -2,6 +2,7 @@
 
 namespace PVLog\Json\Tests;
 
+use PVLog\Classes\Json\Json;
 use PVLog\Classes\Json\Instance;
 use PVLog\Classes\Json\Plant;
 use PVLog\Classes\Json\Inverter;
@@ -79,15 +80,17 @@ class MergeTest extends \PHPUnit_Framework_TestCase {
      *
      */
     public function testMergeInstanceWithFile() {
-        $plant = new Plant;
-        $plant->addTotalWattHours('2000-01-01 02:05:00', 3100);
-        $this->instance->setPlant($plant);
-
         $file = __DIR__.'/files/merge.minutes.json';
         $json = json_decode(file_get_contents($file), TRUE);
         $old = new Instance($json);
 
-        $old->merge($this->instance);
+        // "new" data
+        $plant = new Plant;
+        $plant->addPowerAcWatts('2000-01-01 02:05:00', 1000)
+              ->addTotalWattHours('2000-01-01 02:05:00', 3100);
+
+        $old->merge($this->instance->setPlant($plant));
+
         $file = __DIR__.'/files/merge.minutes.new.json';
         $this->assertJsonStringEqualsJsonFile($file, $old->asJson(TRUE));
     }

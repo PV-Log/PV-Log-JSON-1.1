@@ -200,7 +200,12 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator {
      * @implements \Iterator
      */
     function valid() {
-        return isset($this->keys[$this->position]);
+        if (isset($this->keys[$this->position])) {
+            return TRUE;
+        }
+        // Free keys memory
+        $this->keys = NULL;
+        return FALSE;
     }
 
     /**
@@ -211,6 +216,16 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator {
     function last() {
         $data = array_values($this->data);
         return array_pop($data);
+    }
+
+    /**
+     * Return last data entry
+     *
+     * @return numeric
+     */
+    function sort() {
+        ksort($this->data);
+        return $this;
     }
 
     /**

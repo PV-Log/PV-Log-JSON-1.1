@@ -2,6 +2,7 @@
 
 namespace PVLog\Json\Tests;
 
+use PVLog\Classes\Json\Json;
 use PVLog\Classes\Json\Instance;
 use PVLog\Classes\Json\Plant;
 use PVLog\Classes\Json\Inverter;
@@ -63,6 +64,52 @@ class PlantTest extends \PHPUnit_Framework_TestCase {
      */
     public function testAddInvalidProperty() {
         $this->plant->add('invalid', 0);
+    }
+
+    /**
+     *
+     */
+    public function testInterpolateMultipleInvertes1() {
+        $this->plant = new Plant;
+
+        // Inverter 1
+        $inverter = new Inverter;
+        $inverter->addPowerAcWatts('2000-01-01 00:00:00', 600)
+                 ->addPowerAcWatts('2000-01-01 00:05:00', 600);
+
+        $this->plant->addInverter($inverter);
+
+        // Inverter 1
+        $inverter = new Inverter;
+        $inverter->addPowerAcWatts('2000-01-01 00:05:00', 600)
+                 ->addPowerAcWatts('2000-01-01 00:10:00', 600);
+
+        $instance = new Instance;
+        $instance->setPlant($this->plant->addInverter($inverter));
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/files/interpolate.multi.inverters.1.json', $instance->asJson(TRUE));
+    }
+
+    /**
+     *
+     */
+    public function testInterpolateMultipleInvertes2() {
+        $this->plant = new Plant;
+
+        // Inverter 1
+        $inverter = new Inverter;
+        $inverter->addPowerAcWatts('2000-01-01 00:05:00', 600)
+                 ->addPowerAcWatts('2000-01-01 00:10:00', 600);
+
+        $this->plant->addInverter($inverter);
+
+        // Inverter 1
+        $inverter = new Inverter;
+        $inverter->addPowerAcWatts('2000-01-01 00:00:00', 600)
+                 ->addPowerAcWatts('2000-01-01 00:05:00', 600);
+
+        $instance = new Instance;
+        $instance->setPlant($this->plant->addInverter($inverter));
+        $this->assertJsonStringEqualsJsonFile(__DIR__.'/files/interpolate.multi.inverters.2.json', $instance->asJson(TRUE));
     }
 
     /**

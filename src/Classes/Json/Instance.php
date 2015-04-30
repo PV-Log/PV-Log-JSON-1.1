@@ -360,6 +360,7 @@ class Instance extends Json {
      *
      * @todo   Respect deleteDayBeforeImport loads
      *
+     * @throws InvalidArgumentException
      * @param  Instance $new Data to merge
      * @return array Returns the merged data array
      */

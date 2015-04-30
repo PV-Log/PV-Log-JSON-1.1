@@ -1,0 +1,30 @@
+{
+    "creator": "www.pv-log.com",                                                                                                            
+    "version": "1.1",                                                                                                                       
+    "fileContent": "minutes",                                                                                                               
+    "deleteDayBeforeImport": 0,                                                                                                             
+    "plant": {                                                                                                                              
+        "inverter": {                                                                                                                       
+            "0": {                                                                                                                          
+                "totalWattHours": 50,                                                                                                       
+                "powerAcWatts": {                                                                                                           
+                    "2000-01-01 00:05:00": 600,                                                                                             
+                    "2000-01-01 00:10:00": 600                                                                                              
+                }                                                                                                                           
+            },                                                                                                                              
+            "1": {                                                                                                                          
+                "totalWattHours": 50,                                                                                                       
+                "powerAcWatts": {                                                                                                           
+                    "2000-01-01 00:00:00": 600,                                                                                             
+                    "2000-01-01 00:05:00": 600                                                                                              
+                }                                                                                                                           
+            }                                                                                                                               
+        },                                                                                                                                  
+        "totalWattHours": 100,                                                                                                              
+        "powerAcWatts": {                                                                                                                   
+            "2000-01-01 00:00:00": 600,                                                                                                     
+            "2000-01-01 00:05:00": 1200,                                                                                                    
+            "2000-01-01 00:10:00": 600                                                                                                      
+        }                                                                                                                                   
+    }                                                                                                                                       
+}
