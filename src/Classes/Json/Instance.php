@@ -89,7 +89,7 @@ class Instance extends Json {
      * @return self For fluid interface
      */
     public function setTypeDay() {
-        $this->data[Properties::FILE_CONTENT] = 'day';
+        $this->data[Properties::FILE_CONTENT] = 'days';
         Helper::setDateFormatDay();
         return $this;
     }
@@ -104,7 +104,7 @@ class Instance extends Json {
      * @return self For fluid interface
      */
     public function setTypeMonth() {
-        $this->data[Properties::FILE_CONTENT] = 'month';
+        $this->data[Properties::FILE_CONTENT] = 'months';
         Helper::setDateFormatMonth();
         return $this;
     }
