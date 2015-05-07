@@ -4,6 +4,7 @@
 
 composer.lock
 release.sh
+cp2test.sh
 
 HowToAddNewProperty.md
 
