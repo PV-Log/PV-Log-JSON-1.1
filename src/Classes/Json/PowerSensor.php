@@ -101,7 +101,7 @@ abstract class PowerSensor extends Json {
 
         if ($flags & self::EXPORT_POWER) {
             // Minutes file, round powers
-            $result[Properties::POWER] = array_map('intval', $result[Properties::POWER]);
+            $result[Properties::POWER] = array_map('round', $result[Properties::POWER]);
         }
 
         return $result;

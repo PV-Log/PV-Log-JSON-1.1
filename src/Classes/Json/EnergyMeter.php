@@ -33,12 +33,22 @@ abstract class EnergyMeter extends PowerSensor {
     /**
      * Class constructor
      *
+     * @todo 2.0 - $this->data['lifetime'] = 0;
+     *
      * @param array $data Data to build from
      */
     public function __construct( $data=array() ) {
         // Set the defaults
         // TODO 2.0: $this->data['lifetime'] = 0;
         $this->clearTotalWattHours();
+
+        if (isset($data[Properties::ENERGY]) && !is_array($data[Properties::ENERGY]) &&
+            isset($data[Properties::POWER]) && count($data[Properties::POWER])) {
+            // Build from minutes file, set timestamp of totalWattHours
+            // to last timestamp of powerAcWatts
+            $timestamps = array_keys($data[Properties::POWER]);
+            $data[Properties::ENERGY] = array(max($timestamps) => $data[Properties::ENERGY]);
+        }
 
         parent::__construct($data);
     }
@@ -145,13 +155,13 @@ abstract class EnergyMeter extends PowerSensor {
             if ($flags & self::EXPORT_POWER) {
                 // minutes file, get only last value of Watt hours array
                 $result[Properties::ENERGY] = count($result[Properties::ENERGY])
-                                            ? array_pop($result[Properties::ENERGY])
+                                            ? round(array_pop($result[Properties::ENERGY]))
                                             : 0;
             } else {
                 // day or month file, no power values
                 unset($result[Properties::POWER]);
                 // Minutes file, round energies
-                $result[Properties::ENERGY] = array_map('intval', $result[Properties::ENERGY]);
+                $result[Properties::ENERGY] = array_map('round', $result[Properties::ENERGY]);
             }
         }
 

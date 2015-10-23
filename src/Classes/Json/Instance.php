@@ -89,7 +89,7 @@ class Instance extends Json {
      * @return self For fluid interface
      */
     public function setTypeDay() {
-        $this->data[Properties::FILE_CONTENT] = 'day';
+        $this->data[Properties::FILE_CONTENT] = 'days';
         Helper::setDateFormatDay();
         return $this;
     }
@@ -104,7 +104,7 @@ class Instance extends Json {
      * @return self For fluid interface
      */
     public function setTypeMonth() {
-        $this->data[Properties::FILE_CONTENT] = 'month';
+        $this->data[Properties::FILE_CONTENT] = 'months';
         Helper::setDateFormatMonth();
         return $this;
     }
@@ -273,6 +273,63 @@ class Instance extends Json {
     }
 
     /**
+     * Setter for battery input section
+     *
+     * @param BatteryIn $data
+     * @return self For fluid interface
+     */
+    public function setBatteryIn( BatteryIn $data ) {
+        return $this->set(Properties::BATTERY_IN, $data);
+    }
+
+    /**
+     * Getter for battery input section
+     *
+     * @return BatteryIn|NULL
+     */
+    public function getBatteryIn() {
+        return $this->get(Properties::BATTERY_IN);
+    }
+
+    /**
+     * Setter for battery output section
+     *
+     * @param BatteryOut $data
+     * @return self For fluid interface
+     */
+    public function setBatteryOut(BatteryOut $data ) {
+        return $this->set(Properties::BATTERY_OUT, $data);
+    }
+
+    /**
+     * Getter for battery output section
+     *
+     * @return BatteryOut|NULL
+     */
+    public function getBatteryOut() {
+        return $this->get(Properties::BATTERY_OUT);
+    }
+
+    /**
+     * Setter for battery charge status section
+     *
+     * @param BatteryChargeStatus $data
+     * @return self For fluid interface
+     */
+    public function setBatteryChargeStatus( BatteryChargeStatus $data ) {
+        return $this->set(Properties::BATTERY_CHARGE_STATUS, $data);
+    }
+
+    /**
+     * Getter for battery charge status section
+     *
+     * @return BatteryChargeStatus|NULL
+     */
+    public function getBatteryChargeStatus() {
+        return $this->get(Properties::BATTERY_CHARGE_STATUS);
+    }
+
+    /**
      * Setter for global pretty JSON flag
      *
      * @param  bool $pretty
@@ -360,6 +417,7 @@ class Instance extends Json {
      *
      * @todo   Respect deleteDayBeforeImport loads
      *
+     * @throws InvalidArgumentException
      * @param  Instance $new Data to merge
      * @return array Returns the merged data array
      */
@@ -404,7 +462,10 @@ class Instance extends Json {
         Properties::TOTAL_CONSUMPTION,
         Properties::SELF_CONSUMPTION,
         Properties::IRRADIATION,
-        Properties::TEMPERATURE
+        Properties::TEMPERATURE,
+        Properties::BATTERY_IN,
+        Properties::BATTERY_OUT,
+        Properties::BATTERY_CHARGE_STATUS
     );
 
     /**
