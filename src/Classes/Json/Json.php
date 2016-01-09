@@ -262,13 +262,16 @@ abstract class Json {
      * @var array $classMap Mapping of section to class name for not standard section names
      */
     protected static $classMap = array(
-        'poweracwatts'      => 'Set',
-        'totalwatthours'    => 'Set',
+        'poweracwatts'          => 'Set',
+        'totalwatthours'        => 'Set',
         // Need mappings for UpperCamelCase class names
-        'feedin'            => 'FeedIn',
-        'gridconsumption'   => 'GridConsumption',
-        'totalconsumption'  => 'TotalConsumption',
-        'selfconsumption'   => 'SelfConsumption',
+        'feedin'                => 'FeedIn',
+        'gridconsumption'       => 'GridConsumption',
+        'totalconsumption'      => 'TotalConsumption',
+        'selfconsumption'       => 'SelfConsumption',
+        'batteryin'             => 'BatteryIn',
+        'batteryout'            => 'BatteryOut',
+        'batterychargestatus'   => 'BatteryChargeStatus'
     );
 
     /**
