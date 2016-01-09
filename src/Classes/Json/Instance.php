@@ -118,6 +118,7 @@ class Instance extends Json
     /**
      * Set file type to 'days'
      *
+     * @internal
      * @see setTypeDays()
      * @return self For fluid interface
      */
@@ -143,6 +144,7 @@ class Instance extends Json
     /**
      * Set file type to 'months'
      *
+     * @internal
      * @see setTypeMonths()
      * @return self For fluid interface
      */
