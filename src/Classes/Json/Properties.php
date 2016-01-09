@@ -85,6 +85,21 @@ abstract class Properties {
     const TEMPERATURE = 'temperature';
 
     /**
+     * Property name for battery input data section (Instance)
+     */
+    const BATTERY_IN = 'batteryIn';
+
+    /**
+     * Property name for battery output data section (Instance)
+     */
+    const BATTERY_OUT = 'batteryOut';
+
+    /**
+     * Property name for battery charge status data in % (Instance)
+     */
+    const BATTERY_CHARGE_STATUS = 'batteryChargeStatus';
+
+    /**
      * Property name for inverter section (Plant)
      */
     const INVERTER = 'inverter';

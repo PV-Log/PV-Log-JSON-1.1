@@ -168,7 +168,7 @@ abstract class EnergyMeter extends PowerSensor {
 
                 // Get only last value of Watt hours array
                 $result[Properties::ENERGY] = count($result[Properties::ENERGY])
-                                            ? array_pop($result[Properties::ENERGY])
+                                            ? round(array_pop($result[Properties::ENERGY]))
                                             : 0;
             } else {
                 // day or month file, no power values
