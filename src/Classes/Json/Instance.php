@@ -156,9 +156,7 @@ class Instance extends Json
     /**
      * Set file type to 'months'
      *
-     * Set also the correct datetime format for output: <code>Y-m-t</code>
-     *
-     * <code>t</code> - Last day of month
+     * Set also the correct datetime format for output: <code>Y-m</code>
      *
      * @return self For fluid interface
      */

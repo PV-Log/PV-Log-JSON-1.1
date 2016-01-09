@@ -34,8 +34,6 @@ abstract class EnergyMeter extends PowerSensor
     /**
      * Class constructor
      *
-     * @todo 2.0 - $this->data['lifetime'] = 0;
-     *
      * @param array $data Data to build from
      */
     public function __construct($data=array())
