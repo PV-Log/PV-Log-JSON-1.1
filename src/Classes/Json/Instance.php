@@ -30,6 +30,33 @@ class Instance extends Json {
     // -----------------------------------------------------------------------
 
     /**
+     * Build an Instance from JSON string
+     *
+     * @param  string $json JSON string to build from
+     * @throws \InvalidArgumentException on invalid JSON
+     */
+    public static function fromJson( $json ) {
+        $data = json_decode($json, TRUE);
+        if (json_last_error() != JSON_ERROR_NONE) {
+            throw new \InvalidArgumentException('Invalid JSON: '.$json);
+        }
+        return new Instance($data);
+    }
+
+    /**
+     * Build an Instance from JSON file
+     *
+     * @param string $filename JSON file name to build from
+     * @throws \InvalidArgumentException on missing JSON file
+     */
+    public static function fromJsonFile( $filename ) {
+        if (!is_file($filename)) {
+            throw new \InvalidArgumentException('Missing JSON file: '.$filename);
+        }
+        return self::fromJson(file_get_contents($filename));
+    }
+
+    /**
      * Class constructor
      *
      * @param array $data Data to build from
@@ -82,20 +109,40 @@ class Instance extends Json {
     }
 
     /**
-     * Set file type to 'day'
+     * Set file type to 'days'
+     *
+     * @see setTypeDays()
+     * @return self For fluid interface
+     */
+    public function setTypeDay() {
+        return $this->setTypeDays();
+    }
+
+    /**
+     * Set file type to 'days'
      *
      * Set also the correct datetime format for output: <code>Y-m-d</code>
      *
      * @return self For fluid interface
      */
-    public function setTypeDay() {
+    public function setTypeDays() {
         $this->data[Properties::FILE_CONTENT] = 'days';
         Helper::setDateFormatDay();
         return $this;
     }
 
     /**
-     * Set file type to 'month'
+     * Set file type to 'months'
+     *
+     * @see setTypeMonths()
+     * @return self For fluid interface
+     */
+    public function setTypeMonth() {
+        return $this->setTypeMonths();
+    }
+
+    /**
+     * Set file type to 'months'
      *
      * Set also the correct datetime format for output: <code>Y-m-t</code>
      *
@@ -103,7 +150,7 @@ class Instance extends Json {
      *
      * @return self For fluid interface
      */
-    public function setTypeMonth() {
+    public function setTypeMonths() {
         $this->data[Properties::FILE_CONTENT] = 'months';
         Helper::setDateFormatMonth();
         return $this;
@@ -317,6 +364,26 @@ class Instance extends Json {
     }
 
     /**
+     * Return a JSON repesentation of the whole instance, not interpolated
+     *
+     * @param  bool $pretty Pretty print JSON, if not provided fallback to $prettyJson
+     * @return string|FALSE Return FALSE on error encoding data to JSON
+     */
+    public function asJsonRaw( $pretty=NULL ) {
+        // Force as object
+        $flags = JSON_FORCE_OBJECT;
+        // Pretty print?
+        if (is_null($pretty)) {
+            $pretty = $this->prettyJson;
+        }
+        if ($pretty) {
+            // Pretty print JSON data
+            $flags |= JSON_PRETTY_PRINT;
+        }
+        return json_encode($this->asArray(self::INTERNAL), $flags);
+    }
+
+    /**
      * Save the JSON representation to a file
      *
      * @param  string  $filename File name to save to
@@ -325,6 +392,17 @@ class Instance extends Json {
      */
     public function saveJsonToFile( $filename, $pretty=NULL ) {
         return file_put_contents($filename, $this->asJson($pretty));
+    }
+
+    /**
+     * Save the JSON representation to a file, not interpolated
+     *
+     * @param  string  $filename File name to save to
+     * @param  bool    $pretty Pretty print JSON
+     * @return integer Bytes written to file
+     */
+    public function saveJsonRawToFile( $filename, $pretty=NULL ) {
+        return file_put_contents($filename, $this->asJsonRaw($pretty));
     }
 
     /**

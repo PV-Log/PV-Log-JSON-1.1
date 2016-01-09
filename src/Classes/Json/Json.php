@@ -228,6 +228,7 @@ abstract class Json {
                 $data[$key1] = $value1;
             }
         }
+
         return $data;
     }
 

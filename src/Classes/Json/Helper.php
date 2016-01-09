@@ -54,7 +54,7 @@ abstract class Helper {
      */
     public static function setDateFormatMonth() {
         // Last day of month
-        self::$settings[0] = 'Y-m-t';
+        self::$settings[0] = 'Y-m';
     }
 
     /**

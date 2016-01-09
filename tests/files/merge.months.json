@@ -1,0 +1,18 @@
+{
+  "creator": "www.pv-log.com",
+  "version": "1.1",
+  "fileContent": "months",
+  "deleteDayBeforeImport": 0,
+  "plant": {
+    "inverter": {
+      "0": {
+        "totalWattHours": {
+          "2000-01": 3000
+        }
+      }
+    },
+    "totalWattHours": {
+      "2000-01": 3000
+    }
+  }
+}
