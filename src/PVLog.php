@@ -27,7 +27,8 @@ namespace PVLog;
  * @since    2015-04-08
  * @since    v1.0.0
  */
-abstract class PVLog {
+abstract class PVLog
+{
 
     // -----------------------------------------------------------------------
     // PUBLIC
@@ -38,7 +39,8 @@ abstract class PVLog {
      *
      * @return bool Returns TRUE on success or FALSE on failure.
      */
-    public static function registerAutoloader() {
+    public static function registerAutoloader()
+    {
         return spl_autoload_register(__NAMESPACE__ . '\\PVLog::autoload');
     }
 
@@ -48,14 +50,15 @@ abstract class PVLog {
      * @internal
      * @param string $class Class to load
      */
-    public static function autoload( $class ) {
+    public static function autoload($class)
+    {
         $class = str_replace('PVLog\\', '', $class);
         $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
         $fileName = __DIR__ . DIRECTORY_SEPARATOR . $class . '.php';
         if (file_exists($fileName)) {
             require $fileName;
-            return TRUE;
+            return true;
         }
-        return FALSE;
+        return false;
     }
 }

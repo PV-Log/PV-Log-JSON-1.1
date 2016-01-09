@@ -23,25 +23,12 @@ namespace PVLog\Classes\Json;
  * @since    2015-03-14
  * @since    v1.0.0
  */
-class Instance extends Json {
+class Instance extends Json
+{
 
     // -----------------------------------------------------------------------
     // PUBLIC
     // -----------------------------------------------------------------------
-
-    /**
-     * Build an Instance from JSON string
-     *
-     * @param  string $json JSON string to build from
-     * @throws \InvalidArgumentException on invalid JSON
-     */
-    public static function fromJson( $json ) {
-        $data = json_decode($json, TRUE);
-        if (json_last_error() != JSON_ERROR_NONE) {
-            throw new \InvalidArgumentException('Invalid JSON: '.$json);
-        }
-        return new Instance($data);
-    }
 
     /**
      * Build an Instance from JSON file
@@ -49,7 +36,8 @@ class Instance extends Json {
      * @param string $filename JSON file name to build from
      * @throws \InvalidArgumentException on missing JSON file
      */
-    public static function fromJsonFile( $filename ) {
+    public static function fromJsonFile($filename)
+    {
         if (!is_file($filename)) {
             throw new \InvalidArgumentException('Missing JSON file: '.$filename);
         }
@@ -57,18 +45,34 @@ class Instance extends Json {
     }
 
     /**
+     * Build an Instance from JSON string
+     *
+     * @param  string $json JSON string to build from
+     * @throws \InvalidArgumentException on invalid JSON
+     */
+    public static function fromJson($json)
+    {
+        $data = json_decode($json, true);
+        if (json_last_error() != JSON_ERROR_NONE) {
+            throw new \InvalidArgumentException('Invalid JSON: '.$json);
+        }
+        return new Instance($data);
+    }
+
+    /**
      * Class constructor
      *
      * @param array $data Data to build from
      */
-    public function __construct( $data=array() ) {
+    public function __construct($data=array())
+    {
         // Set the defaults
         $this->data[Properties::CREATOR] = 'www.pv-log.com';
         $this->data[Properties::VERSION] = '1.1';
         // For default type minutes
         $this->setTypeMinutes();
         $this->data[Properties::DELETE_DAY_BEFORE_IMPORT] = 0;
-        $this->data[Properties::PLANT] = NULL;
+        $this->data[Properties::PLANT] = null;
 
         parent::__construct($data);
     }
@@ -79,7 +83,8 @@ class Instance extends Json {
      * @param string $creator
      * @return self For fluid interface
      */
-    public function setCreator( $creator ) {
+    public function setCreator($creator)
+    {
         if ($creator != '') {
             $this->data[Properties::CREATOR] = $creator;
         }
@@ -91,7 +96,8 @@ class Instance extends Json {
      *
      * @return string
      */
-    public function getCreator() {
+    public function getCreator()
+    {
         return $this->data[Properties::CREATOR];
     }
 
@@ -102,8 +108,9 @@ class Instance extends Json {
      *
      * @return self For fluid interface
      */
-    public function setTypeMinutes() {
-        $this->data[Properties::FILE_CONTENT] = 'minutes';
+    public function setTypeMinutes()
+    {
+        $this->data[Properties::FILE_CONTENT] = Properties::FILE_CONTENT_MINUTES;
         Helper::setDateFormatMinutes();
         return $this;
     }
@@ -114,7 +121,8 @@ class Instance extends Json {
      * @see setTypeDays()
      * @return self For fluid interface
      */
-    public function setTypeDay() {
+    public function setTypeDay()
+    {
         return $this->setTypeDays();
     }
 
@@ -125,8 +133,9 @@ class Instance extends Json {
      *
      * @return self For fluid interface
      */
-    public function setTypeDays() {
-        $this->data[Properties::FILE_CONTENT] = 'days';
+    public function setTypeDays()
+    {
+        $this->data[Properties::FILE_CONTENT] = Properties::FILE_CONTENT_DAYS;
         Helper::setDateFormatDay();
         return $this;
     }
@@ -137,7 +146,8 @@ class Instance extends Json {
      * @see setTypeMonths()
      * @return self For fluid interface
      */
-    public function setTypeMonth() {
+    public function setTypeMonth()
+    {
         return $this->setTypeMonths();
     }
 
@@ -150,8 +160,9 @@ class Instance extends Json {
      *
      * @return self For fluid interface
      */
-    public function setTypeMonths() {
-        $this->data[Properties::FILE_CONTENT] = 'months';
+    public function setTypeMonths()
+    {
+        $this->data[Properties::FILE_CONTENT] = Properties::FILE_CONTENT_MONTHS;
         Helper::setDateFormatMonth();
         return $this;
     }
@@ -161,7 +172,8 @@ class Instance extends Json {
      *
      * @return string
      */
-    public function getType() {
+    public function getType()
+    {
         return $this->data[Properties::FILE_CONTENT];
     }
 
@@ -171,7 +183,8 @@ class Instance extends Json {
      * @param integer $delete Default 1
      * @return self For fluid interface
      */
-    public function setDeleteDayBeforeImport( $delete=1 ) {
+    public function setDeleteDayBeforeImport($delete=1)
+    {
         // Make 0 or 1
         $this->data[Properties::DELETE_DAY_BEFORE_IMPORT] = +$delete & 1;
         return $this;
@@ -182,7 +195,8 @@ class Instance extends Json {
      *
      * @return integer (0|1)
      */
-    public function getDeleteDayBeforeImport() {
+    public function getDeleteDayBeforeImport()
+    {
         return $this->data[Properties::DELETE_DAY_BEFORE_IMPORT];
     }
 
@@ -192,7 +206,8 @@ class Instance extends Json {
      * @param  Plant $data
      * @return self For fluid interface
      */
-    public function setPlant( Plant $data ) {
+    public function setPlant(Plant $data)
+    {
         return $this->set(Properties::PLANT, $data);
     }
 
@@ -201,7 +216,8 @@ class Instance extends Json {
      *
      * @return Plant|NULL
      */
-    public function getPlant() {
+    public function getPlant()
+    {
         return $this->get(Properties::PLANT);
     }
 
@@ -211,7 +227,8 @@ class Instance extends Json {
      * @param  FeedIn $data
      * @return self For fluid interface
      */
-    public function setFeedIn( FeedIn $data ) {
+    public function setFeedIn(FeedIn $data)
+    {
         return $this->set(Properties::FEED_IN, $data);
     }
 
@@ -220,7 +237,8 @@ class Instance extends Json {
      *
      * @return FeedIn|NULL
      */
-    public function getFeedIn() {
+    public function getFeedIn()
+    {
         return $this->get(Properties::FEED_IN);
     }
 
@@ -230,7 +248,8 @@ class Instance extends Json {
      * @param  GridConsumption $data
      * @return self For fluid interface
      */
-    public function setGridConsumption( GridConsumption $data ) {
+    public function setGridConsumption(GridConsumption $data)
+    {
         return $this->set(Properties::GRID_CONSUMPTION, $data);
     }
 
@@ -239,7 +258,8 @@ class Instance extends Json {
      *
      * @return GridConsumption|NULL
      */
-    public function getGridConsumption() {
+    public function getGridConsumption()
+    {
         return $this->get(Properties::GRID_CONSUMPTION);
     }
 
@@ -249,7 +269,8 @@ class Instance extends Json {
      * @param  TotalConsumption $data
      * @return self For fluid interface
      */
-    public function setTotalConsumption( TotalConsumption $data ) {
+    public function setTotalConsumption(TotalConsumption $data)
+    {
         return $this->set(Properties::TOTAL_CONSUMPTION, $data);
     }
 
@@ -258,7 +279,8 @@ class Instance extends Json {
      *
      * @return TotalConsumption|NULL
      */
-    public function getTotalConsumption() {
+    public function getTotalConsumption()
+    {
         return $this->get(Properties::TOTAL_CONSUMPTION);
     }
 
@@ -268,7 +290,8 @@ class Instance extends Json {
      * @param  SelfConsumption $data
      * @return self For fluid interface
      */
-    public function setSelfConsumption( SelfConsumption $data ) {
+    public function setSelfConsumption(SelfConsumption $data)
+    {
         return $this->set(Properties::SELF_CONSUMPTION, $data);
     }
 
@@ -277,7 +300,8 @@ class Instance extends Json {
      *
      * @return SelfConsumption|NULL
      */
-    public function getSelfConsumption() {
+    public function getSelfConsumption()
+    {
         return $this->get(Properties::SELF_CONSUMPTION);
     }
 
@@ -287,7 +311,8 @@ class Instance extends Json {
      * @param  Irradiation $data
      * @return self For fluid interface
      */
-    public function setIrradiation( Irradiation $data ) {
+    public function setIrradiation(Irradiation $data)
+    {
         return $this->set(Properties::IRRADIATION, $data);
     }
 
@@ -296,7 +321,8 @@ class Instance extends Json {
      *
      * @return Irradiation|NULL
      */
-    public function getIrradiation() {
+    public function getIrradiation()
+    {
         return $this->get(Properties::IRRADIATION);
     }
 
@@ -306,7 +332,8 @@ class Instance extends Json {
      * @param Temperature $data
      * @return self For fluid interface
      */
-    public function setTemperature( Temperature $data ) {
+    public function setTemperature(Temperature $data)
+    {
         return $this->set(Properties::TEMPERATURE, $data);
     }
 
@@ -315,7 +342,8 @@ class Instance extends Json {
      *
      * @return Temperature|NULL
      */
-    public function getTemperature() {
+    public function getTemperature()
+    {
         return $this->get(Properties::TEMPERATURE);
     }
 
@@ -325,7 +353,8 @@ class Instance extends Json {
      * @param BatteryIn $data
      * @return self For fluid interface
      */
-    public function setBatteryIn( BatteryIn $data ) {
+    public function setBatteryIn(BatteryIn $data)
+    {
         return $this->set(Properties::BATTERY_IN, $data);
     }
 
@@ -334,7 +363,8 @@ class Instance extends Json {
      *
      * @return BatteryIn|NULL
      */
-    public function getBatteryIn() {
+    public function getBatteryIn()
+    {
         return $this->get(Properties::BATTERY_IN);
     }
 
@@ -344,7 +374,8 @@ class Instance extends Json {
      * @param BatteryOut $data
      * @return self For fluid interface
      */
-    public function setBatteryOut(BatteryOut $data ) {
+    public function setBatteryOut(BatteryOut $data)
+    {
         return $this->set(Properties::BATTERY_OUT, $data);
     }
 
@@ -353,7 +384,8 @@ class Instance extends Json {
      *
      * @return BatteryOut|NULL
      */
-    public function getBatteryOut() {
+    public function getBatteryOut()
+    {
         return $this->get(Properties::BATTERY_OUT);
     }
 
@@ -363,7 +395,8 @@ class Instance extends Json {
      * @param BatteryChargeStatus $data
      * @return self For fluid interface
      */
-    public function setBatteryChargeStatus( BatteryChargeStatus $data ) {
+    public function setBatteryChargeStatus(BatteryChargeStatus $data)
+    {
         return $this->set(Properties::BATTERY_CHARGE_STATUS, $data);
     }
 
@@ -372,7 +405,8 @@ class Instance extends Json {
      *
      * @return BatteryChargeStatus|NULL
      */
-    public function getBatteryChargeStatus() {
+    public function getBatteryChargeStatus()
+    {
         return $this->get(Properties::BATTERY_CHARGE_STATUS);
     }
 
@@ -382,7 +416,8 @@ class Instance extends Json {
      * @param  bool $pretty
      * @return self For fluid interface
      */
-    public function setPrettyJson( $pretty ) {
+    public function setPrettyJson($pretty)
+    {
         // Force boolean value with not(not(...))
         $this->prettyJson = !!$pretty;
         return $this;
@@ -396,7 +431,8 @@ class Instance extends Json {
      * @internal
      * @return array
      */
-    public function getRaw() {
+    public function getRaw() 
+    {
         return $this->data;
     }
 
@@ -406,7 +442,8 @@ class Instance extends Json {
      * @param  bool $pretty Pretty print JSON, if not provided fallback to $prettyJson
      * @return string|FALSE Return FALSE on error encoding data to JSON
      */
-    public function asJson( $pretty=NULL ) {
+    public function asJson($pretty=null)
+    {
         // Force as object
         $flags = JSON_FORCE_OBJECT;
         // Pretty print?
@@ -417,7 +454,10 @@ class Instance extends Json {
             // Pretty print JSON data
             $flags |= JSON_PRETTY_PRINT;
         }
-        return json_encode($this->interpolate()->asArray(self::DATETIME), $flags);
+        return json_encode(
+            $this->interpolate()->asArray(self::DATETIME),
+            $flags
+        );
     }
 
     /**
@@ -426,7 +466,8 @@ class Instance extends Json {
      * @param  bool $pretty Pretty print JSON, if not provided fallback to $prettyJson
      * @return string|FALSE Return FALSE on error encoding data to JSON
      */
-    public function asJsonRaw( $pretty=NULL ) {
+    public function asJsonRaw($pretty=null)
+    {
         // Force as object
         $flags = JSON_FORCE_OBJECT;
         // Pretty print?
@@ -447,7 +488,8 @@ class Instance extends Json {
      * @param  bool    $pretty Pretty print JSON
      * @return integer Bytes written to file
      */
-    public function saveJsonToFile( $filename, $pretty=NULL ) {
+    public function saveJsonToFile($filename, $pretty=null)
+    {
         return file_put_contents($filename, $this->asJson($pretty));
     }
 
@@ -458,7 +500,8 @@ class Instance extends Json {
      * @param  bool    $pretty Pretty print JSON
      * @return integer Bytes written to file
      */
-    public function saveJsonRawToFile( $filename, $pretty=NULL ) {
+    public function saveJsonRawToFile($filename, $pretty=null)
+    {
         return file_put_contents($filename, $this->asJsonRaw($pretty));
     }
 
@@ -472,7 +515,8 @@ class Instance extends Json {
      *
      * @return string
      */
-    public function __toString() {
+    public function __toString()
+    {
         return $this->asJSON();
     }
 
@@ -482,8 +526,9 @@ class Instance extends Json {
      * @param integer $flags Feature flags, see PVLog\JSON2 constants
      * @return array
      */
-    public function asArray( $flags=0 ) {
-        if ($this->getType() == 'minutes') {
+    public function asArray($flags=0)
+    {
+        if ($this->getType() == Properties::FILE_CONTENT_MINUTES) {
             $flags |= self::EXPORT_POWER;
         }
 
@@ -499,17 +544,20 @@ class Instance extends Json {
      * @param  Instance $new Data to merge
      * @return array Returns the merged data array
      */
-    public function merge( Instance $new ) {
+    public function merge(Instance $new)
+    {
         // Full data
         $new = $new->asArray(self::INTERNAL);
-        if ($this->data['version'] != $new['version']) {
+        if ($this->data[Properties::VERSION] != $new[Properties::VERSION]) {
             throw new \InvalidArgumentException(
-                'Can only merge instances of same version '.$this->data['version']
+                'Can only merge instances of same version '
+              . $this->data[Properties::VERSION]
             );
         }
-        if ($this->data['fileContent'] != $new['fileContent']) {
+        if ($this->data[Properties::FILE_CONTENT] != $new[Properties::FILE_CONTENT]) {
             throw new \InvalidArgumentException(
-                'Can only merge instances of same file content '.$this->data['fileContent']
+                'Can only merge instances of same file content '
+              . $this->data[Properties::FILE_CONTENT]
             );
         }
         $data = $this->_merge($this->asArray(self::INTERNAL), $new);
@@ -528,7 +576,7 @@ class Instance extends Json {
      * @see __toString()
      * @var bool $prettyJson
      */
-    protected $prettyJson = FALSE;
+    protected $prettyJson = false;
 
     /*
      * Overload
@@ -554,7 +602,8 @@ class Instance extends Json {
      * @param  array $new Data to merge
      * @return array Returns the merged data array
      */
-    protected function _merge( Array $old, Array $new ) {
+    protected function _merge(Array $old, Array $new)
+    {
         foreach ($new as $key=>$value) {
             if (is_array($value)) {
                 if  (isset($old[$key])) {
