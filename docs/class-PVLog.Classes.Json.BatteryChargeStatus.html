@@ -3,7 +3,7 @@
 <head>
 	<meta charset="utf-8">
 
-	<title>Class PVLog\Classes\Json\GridConsumption | PV-Log JSON 1.1</title>
+	<title>Class PVLog\Classes\Json\BatteryChargeStatus | PV-Log JSON 1.1</title>
 
 	<link rel="stylesheet" href="resources/style.css?95ada9fb523b6ab4fd1c47bb375f713f2cc65542">
 
@@ -45,12 +45,12 @@
 		<div id="elements">
 			<h3>Classes</h3>
 			<ul>
-				<li><a href="class-PVLog.Classes.Json.BatteryChargeStatus.html">BatteryChargeStatus</a></li>
+				<li class="active"><a href="class-PVLog.Classes.Json.BatteryChargeStatus.html">BatteryChargeStatus</a></li>
 				<li><a href="class-PVLog.Classes.Json.BatteryIn.html">BatteryIn</a></li>
 				<li><a href="class-PVLog.Classes.Json.BatteryOut.html">BatteryOut</a></li>
 				<li><a href="class-PVLog.Classes.Json.EnergyMeter.html">EnergyMeter</a></li>
 				<li><a href="class-PVLog.Classes.Json.FeedIn.html">FeedIn</a></li>
-				<li class="active"><a href="class-PVLog.Classes.Json.GridConsumption.html">GridConsumption</a></li>
+				<li><a href="class-PVLog.Classes.Json.GridConsumption.html">GridConsumption</a></li>
 				<li><a href="class-PVLog.Classes.Json.Helper.html">Helper</a></li>
 				<li><a href="class-PVLog.Classes.Json.Instance.html">Instance</a></li>
 				<li><a href="class-PVLog.Classes.Json.Inverter.html">Inverter</a></li>
@@ -113,11 +113,13 @@
 	</div>
 
 <div id="content" class="class">
-	<h1>Class GridConsumption</h1>
+	<h1>Class BatteryChargeStatus</h1>
 
 
 	<div class="description">
-	<p>Grid consumption meter channel</p>
+	<p>Battery charge status channel</p>
+
+<p>PV-Log requires charge status in %</p>
 	</div>
 
 	<dl class="tree">
@@ -129,21 +131,20 @@
 		</dd>
 		<dd style="padding-left:30px">
 			<img src="resources/inherit.png" alt="Extended by">
-			<a href="class-PVLog.Classes.Json.PowerSensor.html"><span>PVLog\Classes\Json\PowerSensor</span></a>
+			<a href="class-PVLog.Classes.Json.Set.html"><span>PVLog\Classes\Json\Set</span></a>
 			
+			 implements 
+<span>ArrayAccess</span>, 
+			
+<span>Countable</span>, 
+			
+<span>Iterator</span>
 			
 			
 		</dd>
 		<dd style="padding-left:60px">
 			<img src="resources/inherit.png" alt="Extended by">
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html"><span>PVLog\Classes\Json\EnergyMeter</span></a>
-			
-			
-			
-		</dd>
-		<dd style="padding-left:90px">
-			<img src="resources/inherit.png" alt="Extended by">
-<b><span>PVLog\Classes\Json\GridConsumption</span></b>			
+<b><span>PVLog\Classes\Json\BatteryChargeStatus</span></b>			
 			
 			
 		</dd>
@@ -165,14 +166,14 @@
 				<b>License:</b>
 				<a href="http://opensource.org/licenses/MIT">MIT License (MIT)</a><br>
 				<b>Author:</b>
-				Knut Kohl <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;:&#x6b;&#x6f;&#x68;&#108;&#64;&#116;o&#x70;&#x35;&#x30;&#45;&#115;&#111;l&#x61;&#x72;&#x2e;&#100;&#101;">&#x6b;&#x6f;&#x68;&#108;&#64;&#116;o&#x70;&#x35;&#x30;&#45;&#115;&#111;l&#x61;&#x72;&#x2e;&#100;&#101;</a><br>
+				Andreas Buck <a href="&#109;&#97;&#105;&#108;&#x74;&#x6f;&#x3a;&#x62;u&#99;&#107;&#64;&#x74;&#x6f;&#x70;&#x35;0&#45;&#115;&#111;&#108;&#x61;&#x72;&#x2e;&#x64;&#101;">&#x62;u&#99;&#107;&#64;&#x74;&#x6f;&#x70;&#x35;0&#45;&#115;&#111;&#108;&#x61;&#x72;&#x2e;&#x64;&#101;</a><br>
 				<b>Version:</b>
 				PVLog JSON 1.1<br>
 				<b>Since:</b>
-				2015-04-02<br>
+				2015-10-12<br>
 				<b>Since:</b>
-				v1.0.0<br>
-			<b>Located at</b> <a href="source-class-PVLog.Classes.Json.GridConsumption.html#17-45" title="Go to source code">Classes/Json/GridConsumption.php</a>
+				v1.2.0<br>
+			<b>Located at</b> <a href="source-class-PVLog.Classes.Json.BatteryChargeStatus.html#17-46" title="Go to source code">Classes/Json/BatteryChargeStatus.php</a>
 		<br>
 	</div>
 
@@ -185,21 +186,21 @@
 		<td class="attributes"><code>
 			 public 
 
-			<code><a href="class-PVLog.Classes.Json.GridConsumption.html">PVLog\Classes\Json\GridConsumption</a></code>
+			<code><a href="class-PVLog.Classes.Json.BatteryChargeStatus.html">PVLog\Classes\Json\BatteryChargeStatus</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_setToInstance">#</a>
-		<code><a href="source-class-PVLog.Classes.Json.GridConsumption.html#33-43" title="Go to source code">setToInstance</a>( <span><code><a href="class-PVLog.Classes.Json.Instance.html">PVLog\Classes\Json\Instance</a></code> <var>$instance</var></span> )</code>
+		<code><a href="source-class-PVLog.Classes.Json.BatteryChargeStatus.html#35-45" title="Go to source code">setToInstance</a>( <span><code><a href="class-PVLog.Classes.Json.Instance.html">PVLog\Classes\Json\Instance</a></code> <var>$instance</var></span> )</code>
 
 		<div class="description short">
-			<p>Add the grid consumption to an instance</p>
+			<p>Add the battery charge status to an instance</p>
 		</div>
 
 		<div class="description detailed hidden">
-			<p>Add the grid consumption to an instance</p>
+			<p>Add the battery charge status to an instance</p>
 
 
 				<h4>Parameters</h4>
@@ -210,7 +211,7 @@
 
 				<h4>Returns</h4>
 				<div class="list">
-					<code><a href="class-PVLog.Classes.Json.GridConsumption.html">PVLog\Classes\Json\GridConsumption</a></code><br>For fluid interface
+					<code><a href="class-PVLog.Classes.Json.BatteryChargeStatus.html">PVLog\Classes\Json\BatteryChargeStatus</a></code><br>For fluid interface
 				</div>
 
 
@@ -222,31 +223,14 @@
 	</table>
 
 	<table class="summary inherited">
-	<caption>Methods inherited from <a href="class-PVLog.Classes.Json.EnergyMeter.html#methods">PVLog\Classes\Json\EnergyMeter</a></caption>
+	<caption>Methods inherited from <a href="class-PVLog.Classes.Json.Set.html#methods">PVLog\Classes\Json\Set</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#___construct">__construct()</a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#_addTotalWattHours">addTotalWattHours()</a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#_asArray">asArray()</a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#_clearTotalWattHours">clearTotalWattHours()</a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#_countTotalWattHours">countTotalWattHours()</a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#_getLifeTimeData">getLifeTimeData()</a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#_getTotalWattHours">getTotalWattHours()</a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#_interpolate">interpolate()</a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#_setLifeTimeData">setLifeTimeData()</a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#_setTotalWattHours">setTotalWattHours()</a>
-		</code></td>
-	</tr>
-	</table>
-	<table class="summary inherited">
-	<caption>Methods inherited from <a href="class-PVLog.Classes.Json.PowerSensor.html#methods">PVLog\Classes\Json\PowerSensor</a></caption>
-	<tr>
-		<td><code>
-			<a href="class-PVLog.Classes.Json.PowerSensor.html#_addPowerAcWatts">addPowerAcWatts()</a>, 
-			<a href="class-PVLog.Classes.Json.PowerSensor.html#_clearPowerAcWatts">clearPowerAcWatts()</a>, 
-			<a href="class-PVLog.Classes.Json.PowerSensor.html#_countPowerAcWatts">countPowerAcWatts()</a>, 
-			<a href="class-PVLog.Classes.Json.PowerSensor.html#_getPowerAcWatts">getPowerAcWatts()</a>, 
-			<a href="class-PVLog.Classes.Json.PowerSensor.html#_setPowerAcWatts">setPowerAcWatts()</a>
+			<a href="class-PVLog.Classes.Json.Set.html#_add">add()</a>, 
+			<a href="class-PVLog.Classes.Json.Set.html#_asArray">asArray()</a>, 
+			<a href="class-PVLog.Classes.Json.Set.html#_last">last()</a>, 
+			<a href="class-PVLog.Classes.Json.Set.html#_set">set()</a>, 
+			<a href="class-PVLog.Classes.Json.Set.html#_sort">sort()</a>
 		</code></td>
 	</tr>
 	</table>
@@ -254,11 +238,42 @@
 	<caption>Methods inherited from <a href="class-PVLog.Classes.Json.Json.html#methods">PVLog\Classes\Json\Json</a></caption>
 	<tr>
 		<td><code>
+			<a href="class-PVLog.Classes.Json.Json.html#___construct">__construct()</a>, 
 			<a href="class-PVLog.Classes.Json.Json.html#___get">__get()</a>, 
 			<a href="class-PVLog.Classes.Json.Json.html#___set">__set()</a>, 
-			<a href="class-PVLog.Classes.Json.Json.html#_add">add()</a>, 
 			<a href="class-PVLog.Classes.Json.Json.html#_get">get()</a>, 
-			<a href="class-PVLog.Classes.Json.Json.html#_set">set()</a>
+			<a href="class-PVLog.Classes.Json.Json.html#_interpolate">interpolate()</a>
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from Iterator</caption>
+	<tr>
+		<td><code>
+current(), 
+key(), 
+next(), 
+rewind(), 
+valid()
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from Countable</caption>
+	<tr>
+		<td><code>
+count()
+		</code></td>
+	</tr>
+	</table>
+	<table class="summary inherited">
+	<caption>Methods inherited from ArrayAccess</caption>
+	<tr>
+		<td><code>
+offsetExists(), 
+offsetGet(), 
+offsetSet(), 
+offsetUnset()
 		</code></td>
 	</tr>
 	</table>
@@ -275,11 +290,10 @@
 
 
 	<table class="summary inherited">
-	<caption>Properties inherited from <a href="class-PVLog.Classes.Json.EnergyMeter.html#properties">PVLog\Classes\Json\EnergyMeter</a></caption>
+	<caption>Properties inherited from <a href="class-PVLog.Classes.Json.Json.html#properties">PVLog\Classes\Json\Json</a></caption>
 	<tr>
 		<td><code>
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#$lifeTimeData"><var>$lifeTimeData</var></a>, 
-			<a href="class-PVLog.Classes.Json.EnergyMeter.html#$validSections"><var>$validSections</var></a>
+			<a href="class-PVLog.Classes.Json.Json.html#$validSections"><var>$validSections</var></a>
 		</code></td>
 	</tr>
 	</table>
