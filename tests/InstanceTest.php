@@ -127,11 +127,11 @@ class InstanceTest extends \PHPUnit_Framework_TestCase {
 
         $r = $this->instance->setTypeDay();
         $this->assertInstanceOf('PVLog\Classes\Json\Instance', $r);
-        $this->assertEquals('day', $this->instance->getType());
+        $this->assertEquals('days', $this->instance->getType());
 
         $r = $this->instance->setTypeMonth();
         $this->assertInstanceOf('PVLog\Classes\Json\Instance', $r);
-        $this->assertEquals('month', $this->instance->getType());
+        $this->assertEquals('months', $this->instance->getType());
     }
 
     /**

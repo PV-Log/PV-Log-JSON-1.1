@@ -34,10 +34,10 @@ It is **not** required, that the timestamps of your data align to PV-Log 5 minut
 
     <?php
 
-    use PVLog\Classes\Instance; // Installation level class atop over all
-    use PVLog\Classes\Plant;    // Plant node class
-    use PVLog\Classes\Inverter; // Inverter node class
-    use PVLog\Classes\Strings;  // String node class
+    use PVLog\Classes\Json\Instance; // Installation level class atop over all
+    use PVLog\Classes\Json\Plant;    // Plant node class
+    use PVLog\Classes\Json\Inverter; // Inverter node class
+    use PVLog\Classes\Json\Strings;  // String node class
 
     // Let's start with the node objects
     $installation = new Instance;
@@ -112,8 +112,8 @@ If you build data for solar parks with dozens of inverters (especially connected
 
 If you have data for **more** than **one day** in your structure, you can also direct generate `day` or `month` files.
 
-    // Get data for fileContent == day
+    // Get data for fileContent == days
     echo $installation->setTypeDay();
 
-    // Get data for fileContent == month
+    // Get data for fileContent == months
     echo $installation->setTypeMonth();
