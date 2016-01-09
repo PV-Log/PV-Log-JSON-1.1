@@ -23,7 +23,8 @@ namespace PVLog\Classes\Json;
  * @since    2015-04-02
  * @since    v1.0.0
  */
-class GridConsumption extends EnergyMeter {
+class GridConsumption extends EnergyMeter
+{
 
     // -----------------------------------------------------------------------
     // PUBLIC
@@ -35,32 +36,10 @@ class GridConsumption extends EnergyMeter {
      * @param  Instance $instance
      * @return self For fluid interface
      */
-    public function setToInstance( Instance $instance ) {
+    public function setToInstance(Instance $instance)
+    {
         $instance->setGridConsumption($this);
         return $this;
     }
 
-
-    /*
-     * Overloaded
-     *
-     * Remove trailing 0 values during the day
-     */
-    public function asArray( $flags=0 ) {
-        $result = parent::asArray($flags);
-
-        if ($flags & self::EXPORT_POWER) {
-            // Minutes file, round powers
-            // Reverse array, easier to delete leading data
-            $reversed = array_reverse($result[Properties::POWER], TRUE);
-            foreach ($reversed as $timestamp=>$value) {
-                // Break loop on 1st non 0 value
-                if ($value) break;
-                unset($reversed[$timestamp]);
-            }
-            $result[Properties::POWER] = array_reverse($reversed, TRUE);
-        }
-
-        return $result;
-    }
 }

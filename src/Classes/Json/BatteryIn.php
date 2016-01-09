@@ -23,7 +23,8 @@ namespace PVLog\Classes\Json;
  * @since    2015-10-12
  * @since    v1.2.0
  */
-class BatteryIn extends EnergyMeter {
+class BatteryIn extends EnergyMeter
+{
 
     // -----------------------------------------------------------------------
     // PUBLIC
@@ -35,7 +36,8 @@ class BatteryIn extends EnergyMeter {
      * @param  Instance $instance
      * @return self For fluid interface
      */
-    public function setToInstance( Instance $instance ) {
+    public function setToInstance(Instance $instance)
+    {
         $instance->setBatteryIn($this);
         return $this;
     }

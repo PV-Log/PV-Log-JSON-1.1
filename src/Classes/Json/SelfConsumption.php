@@ -23,7 +23,8 @@ namespace PVLog\Classes\Json;
  * @since    2015-04-13
  * @since    v1.0.0
  */
-class SelfConsumption extends EnergyMeter {
+class SelfConsumption extends EnergyMeter
+{
 
     // -----------------------------------------------------------------------
     // PUBLIC
@@ -35,28 +36,10 @@ class SelfConsumption extends EnergyMeter {
      * @param  Instance $instance
      * @return self For fluid interface
      */
-    public function setToInstance( Instance $instance ) {
+    public function setToInstance(Instance $instance)
+    {
         $instance->setSelfConsumption($this);
         return $this;
     }
 
-    /*
-     * Overloaded
-     *
-     * Remove leading 0 values in front of day
-     */
-    public function asArray( $flags=0 ) {
-        $result = parent::asArray($flags);
-
-        if ($flags & self::EXPORT_POWER) {
-            // Minutes file, round powers
-            foreach ($result[Properties::POWER] as $timestamp=>$value) {
-                // Break loop on 1st non 0 value
-                if ($value) break;
-                unset($result[Properties::POWER][$timestamp]);
-            }
-        }
-
-        return $result;
-    }
 }

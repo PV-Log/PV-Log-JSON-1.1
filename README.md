@@ -110,10 +110,10 @@ If you build data for solar parks with dozens of inverters (especially connected
              'please check file/directory permissions';
     }
 
-If you have data for **more** than **one day** in your structure, you can also direct generate `day` or `month` files.
+If you have data for **more** than **one day** in your structure, you can also direct generate `days` or `months` files.
 
     // Get data for fileContent == days
-    echo $installation->setTypeDay();
+    echo $installation->setTypeDays();
 
     // Get data for fileContent == months
-    echo $installation->setTypeMonth();
+    echo $installation->setTypeMonths();
