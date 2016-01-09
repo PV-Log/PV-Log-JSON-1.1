@@ -1,5 +1,7 @@
 <?php
-
+/**
+ *
+ */
 namespace PVLog\Json\Tests;
 
 use PVLog\Classes\Json\Helper;
@@ -13,8 +15,6 @@ class HelperTest extends \PHPUnit_Framework_TestCase {
      *
      */
     public function testAsTimestampFormats() {
-        // Force time zone to use
-        date_default_timezone_set('Europe/London');
         $this->assertEquals(0, Helper::asTimestamp(0));
         $this->assertEquals(-date('Z'), Helper::asTimestamp('1970-01-01 00:00:00'));
     }
@@ -36,7 +36,7 @@ class HelperTest extends \PHPUnit_Framework_TestCase {
         Helper::setDateFormatDay();
         $this->assertEquals('Y-m-d', Helper::getDateFormat());
         Helper::setDateFormatMonth();
-        $this->assertEquals('Y-m-t', Helper::getDateFormat());
+        $this->assertEquals('Y-m', Helper::getDateFormat());
     }
 
     /**

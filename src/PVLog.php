@@ -34,7 +34,7 @@ abstract class PVLog {
     // -----------------------------------------------------------------------
 
     /**
-     * Register PVLog's PSR-0 autoloader
+     * Register PVLog autoloader
      *
      * @return bool Returns TRUE on success or FALSE on failure.
      */
@@ -43,35 +43,19 @@ abstract class PVLog {
     }
 
     /**
-     * PSR-0 autoloader
+     * PVLog autoloader
      *
      * @internal
      * @param string $class Class to load
      */
     public static function autoload( $class ) {
-        $thisClass = str_replace(__NAMESPACE__.'\\', '', __CLASS__);
-
-        $base = __DIR__;
-
-        if (substr($base, -strlen($thisClass)) === $thisClass) {
-            $base = substr($base, 0, -strlen($thisClass));
-        }
-
-        $class = ltrim($class, '\\');
-        $fileName = $base;
-        $namespace = '';
-        if ($lastNsPos = strripos($class, '\\')) {
-            $namespace = substr($class, 0, $lastNsPos);
-            $class = substr($class, $lastNsPos + 1);
-            $fileName .= str_replace('\\', DIRECTORY_SEPARATOR, $namespace) . DIRECTORY_SEPARATOR;
-        }
-        $fileName .= str_replace('_', DIRECTORY_SEPARATOR, $class) . '.php';
-
+        $class = str_replace('PVLog\\', '', $class);
+        $class = str_replace('\\', DIRECTORY_SEPARATOR, $class);
+        $fileName = __DIR__ . DIRECTORY_SEPARATOR . $class . '.php';
         if (file_exists($fileName)) {
             require $fileName;
             return TRUE;
         }
-
         return FALSE;
     }
 }

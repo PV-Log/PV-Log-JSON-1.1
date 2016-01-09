@@ -111,24 +111,6 @@ abstract class EnergyMeter extends PowerSensor {
     public function interpolate() {
         parent::interpolate();
 
-        // If no totalWattHours was provided, calculate from "power"
-        if (!count($this->data[Properties::ENERGY]) && count($this->data[Properties::POWER])) {
-            $last  = FALSE;
-            $total = 0;
-            foreach ($this->data[Properties::POWER] as $timestamp=>$value) {
-                // May be, we have here datetimes, so reconvert to timestamp
-                $ts = Helper::asTimestamp($timestamp);
-                if ($last) {
-                    $total += $value * ($ts - $last) / 3600;
-                }
-                $this->data[Properties::ENERGY][$timestamp] = $total;
-                $last = $ts;
-            }
-      
-            // Can't be lifetime data
-            // @todo 2.0: $this->setLifetime(0);
-        }
-
         // If no powerAcWatts was provided, calculate from "energy"
         if (!count($this->data[Properties::POWER]) && count($this->data[Properties::ENERGY])) {
             $last = FALSE;
@@ -142,6 +124,21 @@ abstract class EnergyMeter extends PowerSensor {
             }
         }
 
+        // If no totalWattHours was provided, calculate from "power"
+        if (!count($this->data[Properties::ENERGY]) && count($this->data[Properties::POWER])) {
+            $last  = FALSE;
+            $total = 0;
+            foreach ($this->data[Properties::POWER] as $timestamp=>$value) {
+                // May be, we have here datetimes, so reconvert to timestamp
+                $ts = Helper::asTimestamp($timestamp);
+                if ($last) {
+                    $total += $value * ($ts - $last) / 3600;
+                }
+                $this->data[Properties::ENERGY][$timestamp] = $total;
+                $last = $ts;
+            }
+        }
+
         return $this;
     }
 
@@ -152,15 +149,31 @@ abstract class EnergyMeter extends PowerSensor {
         $result = parent::asArray($flags);
 
         if (!($flags & self::INTERNAL)) {
+
             if ($flags & self::EXPORT_POWER) {
-                // minutes file, get only last value of Watt hours array
+                // minutes file
+//                 // Check energy data for lifetime data
+//                 if (count($result[Properties::ENERGY]) > 1) {
+//                     // Work on a copy!
+//                     $a = $result[Properties::ENERGY];
+//                     // Get 1st value
+//                     $offset = array_shift($a);
+//                     if ($offset) {
+//                         // Reduce all values by $offset
+//                         foreach ($result[Properties::ENERGY] as $key=>$value) {
+//                             $result[Properties::ENERGY][$key] = $value - $offset;
+//                         }
+//                     }
+//                 }
+
+                // Get only last value of Watt hours array
                 $result[Properties::ENERGY] = count($result[Properties::ENERGY])
                                             ? round(array_pop($result[Properties::ENERGY]))
                                             : 0;
             } else {
                 // day or month file, no power values
                 unset($result[Properties::POWER]);
-                // Minutes file, round energies
+                // Round energies
                 $result[Properties::ENERGY] = array_map('round', $result[Properties::ENERGY]);
             }
         }

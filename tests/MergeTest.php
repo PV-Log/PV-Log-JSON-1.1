@@ -13,6 +13,9 @@ use PVLog\Classes\Json\Strings;
  */
 class MergeTest extends \PHPUnit_Framework_TestCase {
 
+    /**
+     *
+     */
     protected $instance;
 
     /**
@@ -55,10 +58,18 @@ class MergeTest extends \PHPUnit_Framework_TestCase {
         // Build merged instance
         $this->instance->merge($new);
 
-        $path = __DIR__.'/files/';
-        $this->assertJsonStringEqualsJsonFile($path.'merge.minutes.json', $this->instance->setTypeMinutes()->asJson(TRUE));
-        $this->assertJsonStringEqualsJsonFile($path.'merge.day.json',     $this->instance->setTypeDay()->asJson(TRUE));
-        $this->assertJsonStringEqualsJsonFile($path.'merge.month.json',   $this->instance->setTypeMonth()->asJson(TRUE));
+        $this->assertJsonStringEqualsJsonFile(
+            __DIR__.'/files/merge.minutes.json',
+            $this->instance->setTypeMinutes()->asJson(TRUE)
+        );
+        $this->assertJsonStringEqualsJsonFile(
+            __DIR__.'/files/merge.days.json',
+            $this->instance->setTypeDays()->asJson(TRUE)
+        );
+        $this->assertJsonStringEqualsJsonFile(
+            __DIR__.'/files/merge.months.json',
+            $this->instance->setTypeMonths()->asJson(TRUE)
+        );
     }
 
     /**
