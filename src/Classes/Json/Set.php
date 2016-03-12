@@ -327,6 +327,9 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
                 unset($data[$timestamp]);
             }
 
+            /**
+             * Issue #8, allow trailing zero values for completeness
+             *
             // Remove trailing 0 values
             // Reverse array, it is easier to delete leading data
             foreach (array_reverse($data, true) as $timestamp=>$value) {
@@ -334,6 +337,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
                 if ($value) break;
                 unset($data[$timestamp]);
             }
+            */
         }
 
         return $data;
