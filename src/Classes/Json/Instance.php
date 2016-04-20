@@ -35,7 +35,7 @@ class Instance extends Json
      *
      * @data integer
      */
-    public static $Aggregation = 300;
+    public static $aggregation = 300;
 
     /**
      * Build an Instance from JSON file

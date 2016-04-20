@@ -120,7 +120,7 @@ class SetTest extends \PHPUnit_Framework_TestCase {
      */
     public function testInterpolateAggregationAndAsArray() {
         // Minute intervall
-        Instance::$Aggregation = 60;
+        Instance::$aggregation = 60;
 
         $before = array(
             '2000-01-01 00:00:00' => 1,
@@ -143,7 +143,7 @@ class SetTest extends \PHPUnit_Framework_TestCase {
         $this->assertEquals($this->set->interpolate()->asArray(Set::DATETIME), $after);
 
         // Reset Minute intervall
-        Instance::$Aggregation = 300;
+        Instance::$aggregation = 300;
     }
 
     /**

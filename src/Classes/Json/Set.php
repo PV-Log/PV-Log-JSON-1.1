@@ -262,7 +262,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
         // Recalc timestamps to PV-Log timestamps
         foreach ($this->data as $timestamp=>$value) {
             // Into PV-Log timestamp
-            $data[floor($timestamp / Instance::$Aggregation) * Instance::$Aggregation] = $value;
+            $data[floor($timestamp / Instance::$aggregation) * Instance::$aggregation] = $value;
         }
 
         ksort($data);
@@ -278,16 +278,16 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
         foreach ($timestamps as $timestamp) {
             $diff = $timestamp - $last;
 
-            if ($diff > Instance::$Aggregation) {
+            if ($diff > Instance::$aggregation) {
                 // Calculate delta between
-                $delta = ($data[$timestamp] - $data[$last]) / $diff * Instance::$Aggregation;
+                $delta = ($data[$timestamp] - $data[$last]) / $diff * Instance::$aggregation;
                 // Remember base value to apply deltas to
                 $base = $data[$last];
 
                 // Interpolate values between
                 $i = 1;
                 while ($last < $timestamp) {
-                    $last += Instance::$Aggregation;
+                    $last += Instance::$aggregation;
                     $this->data[$last] = $base + $delta * $i++;
                 }
             }
