@@ -2,6 +2,7 @@
 
 namespace PVLog\Json\Tests;
 
+use PVLog\Classes\Json\Instance;
 use PVLog\Classes\Json\Set;
 
 /**
@@ -112,6 +113,37 @@ class SetTest extends \PHPUnit_Framework_TestCase {
             '2000-01-01 00:15:00' => 4
         );
         $this->assertEquals($this->set->interpolate()->asArray(Set::DATETIME), $after);
+    }
+
+    /**
+     *
+     */
+    public function testInterpolateAggregationAndAsArray() {
+        // Minute intervall
+        Instance::$Aggregation = 60;
+
+        $before = array(
+            '2000-01-01 00:00:00' => 1,
+            '2000-01-01 00:03:00' => 4,
+            '2000-01-01 00:08:00' => 9
+        );
+        $this->set->set($before);
+
+        $after = array(
+            '2000-01-01 00:00:00' => 1,
+            '2000-01-01 00:01:00' => 2,
+            '2000-01-01 00:02:00' => 3,
+            '2000-01-01 00:03:00' => 4,
+            '2000-01-01 00:04:00' => 5,
+            '2000-01-01 00:05:00' => 6,
+            '2000-01-01 00:06:00' => 7,
+            '2000-01-01 00:07:00' => 8,
+            '2000-01-01 00:08:00' => 9,
+        );
+        $this->assertEquals($this->set->interpolate()->asArray(Set::DATETIME), $after);
+
+        // Reset Minute intervall
+        Instance::$Aggregation = 300;
     }
 
     /**
