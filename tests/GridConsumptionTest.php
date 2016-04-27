@@ -35,6 +35,7 @@ class GridConsumptionTest extends \PHPUnit_Framework_TestCase {
                         Properties::POWER => array (
                             '2000-01-01 00:00:00' => 36,
                             '2000-01-01 00:05:00' => 36,
+                            '2000-01-01 00:10:00' => 0
                         ),
                     );
         $this->assertEquals($expected, $this->gc->asArray(Json::EXPORT_POWER | Json::DATETIME));

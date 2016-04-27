@@ -212,7 +212,7 @@ class Plant extends EnergyMeter
                 if ($energy) {
                     $last = $this->data[$property][$timestamp];
                     while ($timestamp < $maxTimestamp) {
-                        $timestamp += 300;
+                        $timestamp += Instance::$aggregation;
                         $this->data[$property][$timestamp] += $value;
                     }
                 }
