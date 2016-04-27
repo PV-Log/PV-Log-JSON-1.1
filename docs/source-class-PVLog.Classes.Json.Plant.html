@@ -6,7 +6,7 @@
 
 	<title>File Classes/Json/Plant.php | PV-Log JSON 1.1</title>
 
-	<link rel="stylesheet" href="resources/style.css?95ada9fb523b6ab4fd1c47bb375f713f2cc65542">
+	<link rel="stylesheet" href="resources/style.css?c2f33731c1948fbed7c333554678bfa68d4817da">
 
 </head>
 
@@ -328,7 +328,7 @@
 </span><span id="212" class="l">                <span class="php-keyword1">if</span> (<span class="php-var">$energy</span>) {
 </span><span id="213" class="l">                    <span class="php-var">$last</span> = <span class="php-var">$this</span>-&gt;data[<span class="php-var">$property</span>][<span class="php-var">$timestamp</span>];
 </span><span id="214" class="l">                    <span class="php-keyword1">while</span> (<span class="php-var">$timestamp</span> &lt; <span class="php-var">$maxTimestamp</span>) {
-</span><span id="215" class="l">                        <span class="php-var">$timestamp</span> += <span class="php-num">300</span>;
+</span><span id="215" class="l">                        <span class="php-var">$timestamp</span> += Instance::<span class="php-var">$aggregation</span>;
 </span><span id="216" class="l">                        <span class="php-var">$this</span>-&gt;data[<span class="php-var">$property</span>][<span class="php-var">$timestamp</span>] += <span class="php-var">$value</span>;
 </span><span id="217" class="l">                    }
 </span><span id="218" class="l">                }
@@ -352,7 +352,7 @@
 	</div>
 </div>
 </div>
-<script src="resources/combined.js?eb66d482e38a83d348059ed3ba50adbd84984352"></script>
+<script src="resources/combined.js?518b174a78714df9f660313ff0d9a36885a92146"></script>
 <script src="elementlist.js?0d6150254a5ebec5591aed5a8d554c20d067567d"></script>
 </body>
 </html>
