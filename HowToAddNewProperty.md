@@ -37,7 +37,7 @@ To add a new property to `Instance` or `Inverter`, you have to follow these step
 
 ### Create `Irradiation.php`
 
-    $ cp src/Classes/Json/Channel.template.php src/Classes/Json/Irradiation.php
+    $ cp src/Classes/Json/Channel.php.tpl src/Classes/Json/Irradiation.php
 
 ### Edit `Irradiation.php` and replace all ... dots
 
@@ -48,6 +48,7 @@ To add a new property to `Instance` or `Inverter`, you have to follow these step
      * @license  http://opensource.org/licenses/MIT MIT License (MIT)
      * @version  PVLog JSON 1.1
      * @since    2015-04-03
+     * @since    v1.2.0
      */
     class Irradiation extends Set {}
 
