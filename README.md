@@ -1,5 +1,7 @@
 # PV-Log JSON 1.1
 
+### v1.4.0
+
 ## Generator classes SDK
 
 To participate in [PV-Log](http://pv-log.com) with a not directly supported data logger you can use these PHP classes to generate **compatible** and **valid** PV-Log JSON 1.1 files.
@@ -96,7 +98,7 @@ If you build data for solar parks with dozens of inverters (especially connected
 
     // 1. Get single line of JSON data
     $json = $installation->asJson();
-    $json = $installation->asJson(TRUE); // prettified
+    $json = $installation->asJson(true); // prettified
 
     // 2. Output single line of JSON data via magic __toString() method
     echo $installation;
@@ -104,16 +106,19 @@ If you build data for solar parks with dozens of inverters (especially connected
     // 3. Store the data somewhere, e.g. into file system
     $fileName = '/path/to/file.json';
     $writtenBytes = $installation->saveToJsonFile($fileName);
-    $writtenBytes = $installation->saveToJsonFile($fileName, TRUE); // prettified
+    $writtenBytes = $installation->saveToJsonFile($fileName, true); // prettified
     if ($writtenBytes === FALSE) {
         echo 'Ups, something went wrong, couldn\'t save data, ',
              'please check file/directory permissions';
     }
 
-If you have data for **more** than **one day** in your structure, you can also direct generate `days` or `months` files.
+If you have data for **more** than **one day** in your structure, you can also direct generate `days` or `months` files, here alo via magic __toString() method.
+
+Most setter methods return the object itself for fluid interface.
 
     // Get data for fileContent == days
     echo $installation->setTypeDays();
 
     // Get data for fileContent == months
     echo $installation->setTypeMonths();
+
