@@ -147,29 +147,58 @@ abstract class EnergyMeter extends PowerSensor
 
         // If no powerAcWatts was provided, calculate from "energy"
         if (!count($this->data[Properties::POWER]) && count($this->data[Properties::ENERGY])) {
-            $last = false;
-            foreach ($this->data[Properties::ENERGY] as $timestamp=>$value) {
-                // May be, we have here datetimes, so reconvert to timestamp
-                $ts = Helper::asTimestamp($timestamp);
-                if ($last) {
-                    $this->data[Properties::POWER][$timestamp] = 3600 / ($ts - $last[0]) * ($value - $last[1]);
-                }
-                $last = array($ts, $value);
-            }
+            $this->calcPowers();
         }
 
         // If no totalWattHours was provided (last() is null or 0), calculate from "power"
         if (!$this->data[Properties::ENERGY]->last() && count($this->data[Properties::POWER])) {
-            $last = $total = 0;
-            foreach ($this->data[Properties::POWER] as $timestamp=>$value) {
-                // May be, we have here datetimes, so reconvert to timestamp
-                $ts = Helper::asTimestamp($timestamp);
-                if ($last) {
-                    $total += $value * ($ts - $last) / 3600;
-                }
-                $this->data[Properties::ENERGY][$timestamp] = $total;
-                $last = $ts;
+            $this->calcEnergy();
+        }
+
+        return $this;
+    }
+
+    /**
+     * Force recalculation of Powers from Energy
+     *
+     * @return self For fluid interface
+     */
+    public function calcPowers()
+    {
+        $this->data[Properties::POWER] = new Set;
+
+        $last = false;
+        foreach ($this->data[Properties::ENERGY] as $timestamp=>$value) {
+            // May be, we have here datetimes, so reconvert to timestamp
+            $ts = Helper::asTimestamp($timestamp);
+            if ($last) {
+                $this->data[Properties::POWER][$timestamp] = 3600 / ($ts - $last[0]) * ($value - $last[1]);
             }
+            $last = array($ts, $value);
+        }
+
+        return $this;
+    }
+
+    /**
+     * Force recalculation of Energy from Powers
+     *
+     * @return self For fluid interface
+     */
+    public function calcEnergy()
+    {
+        $this->data[Properties::ENERGY] = new Set;
+
+        $last  = false;
+        $total = 0;
+        foreach ($this->data[Properties::POWER] as $timestamp=>$value) {
+            // May be, we have here datetimes, so reconvert to timestamp
+            $ts = Helper::asTimestamp($timestamp);
+            if ($last) {
+                $total += $value * ($ts - $last) / 3600;
+            }
+            $this->data[Properties::ENERGY][$timestamp] = $total;
+            $last = $ts;
         }
 
         return $this;
