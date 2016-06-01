@@ -43,11 +43,10 @@ abstract class EnergyMeter extends PowerSensor
         $this->lifeTimeData = false;
 
         if (isset($data[Properties::ENERGY]) && !is_array($data[Properties::ENERGY]) &&
-            isset($data[Properties::POWER]) && count($data[Properties::POWER])) {
-            // Build from minutes file, set timestamp of totalWattHours
-            // to last timestamp of powerAcWatts
+            isset($data[Properties::POWER]) && is_array($data[Properties::POWER]) && count($data[Properties::POWER])) {
+            // totalWattHours without timestamp but powers
             $timestamps = array_keys($data[Properties::POWER]);
-            $data[Properties::ENERGY] = array(max($timestamps) => $data[Properties::ENERGY]);
+            $data[Properties::ENERGY] = array(array_pop($timestamps) => $data[Properties::ENERGY]);
         }
 
         parent::__construct($data);
@@ -75,9 +74,13 @@ abstract class EnergyMeter extends PowerSensor
      */
     public function setTotalWattHours($data)
     {
-        $this->data[Properties::ENERGY] = $data instanceof Set
-                                        ? $data
-                                        : new Set($data);
+        if ($data instanceof Set) {
+            $this->data[Properties::ENERGY] = $data;
+        } else {
+            is_array($data) || $data = array('midnight' => $data);
+            $this->data[Properties::ENERGY] = new Set($data);
+        }
+
         return $this;
     }
 
@@ -155,10 +158,9 @@ abstract class EnergyMeter extends PowerSensor
             }
         }
 
-        // If no totalWattHours was provided, calculate from "power"
-        if (!count($this->data[Properties::ENERGY]) && count($this->data[Properties::POWER])) {
-            $last  = false;
-            $total = 0;
+        // If no totalWattHours was provided (last() is null or 0), calculate from "power"
+        if (!$this->data[Properties::ENERGY]->last() && count($this->data[Properties::POWER])) {
+            $last = $total = 0;
             foreach ($this->data[Properties::POWER] as $timestamp=>$value) {
                 // May be, we have here datetimes, so reconvert to timestamp
                 $ts = Helper::asTimestamp($timestamp);

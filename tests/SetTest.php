@@ -52,6 +52,46 @@ class SetTest extends \PHPUnit_Framework_TestCase {
     }
 
     /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetInvalidData1() {
+        // Value must be a scalar
+        $this->set->set(
+            1,
+            array(
+                '2000-01-01 00:00:00' => 1
+            )
+        );
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetInvalidData2() {
+        // Without timestamp, value must be a scalar
+        $this->set->set(
+            array(
+                array(
+                    '2000-01-01 00:00:00' => 1
+                )
+            )
+        );
+    }
+
+    /**
+     * @expectedException InvalidArgumentException
+     */
+    public function testSetInvalidData3() {
+        // null is an invalid timestamp
+        $this->set->set(
+            null,
+            array(
+                '2000-01-01 00:00:00' => 1
+            )
+        );
+    }
+
+    /**
      *
      */
     public function testCountable() {

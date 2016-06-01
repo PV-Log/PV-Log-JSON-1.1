@@ -555,6 +555,7 @@ class Instance extends Json
     {
         // Full data
         $new = $new->asArray(self::INTERNAL);
+
         if ($this->data[Properties::VERSION] != $new[Properties::VERSION]) {
             throw new \InvalidArgumentException(
                 'Can only merge instances of same version '
@@ -623,6 +624,7 @@ class Instance extends Json
             }
         }
 
+        ksort($old);
         return $old;
     }
 

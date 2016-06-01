@@ -44,9 +44,12 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
      */
     public function __construct($data=array())
     {
-        is_array($data) || $data = array('midnight' => $data);
-        foreach ($data as $key=>$value) {
-            $this[$key] = $value;
+        if (is_array($data)) {
+            foreach ($data as $key=>$value) {
+                $this->offsetSet($key, $value);
+            }
+        } elseif (isset($data)) {
+            $this->offsetSet('midnight', $data);
         }
     }
 
@@ -59,7 +62,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
      */
     public function add($name, $data)
     {
-        $this[$name] = $data;
+        $this->offsetSet($name, $data);
         return $this;
     }
 
@@ -73,11 +76,11 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
     {
         if (is_array($name) && is_null($data)) {
             foreach ($name as $datetime=>$value) {
-                $this[$datetime] = $value;
+                $this->offsetSet($datetime, $value);
             }
         } else {
             $this->clear();
-            $this[$name] = $data;
+            $this->offsetSet($name, $data);
         }
 
         return $this;
@@ -88,7 +91,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
      *
      * @internal
      * @implements \Countable
-     * @return integer
+     * @return self For fluid interface
      */
     public function clear()
     {
@@ -121,12 +124,20 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
     {
         if (is_null($datetime)) {
             throw new \InvalidArgumentException(
-                'Can\'t add a value without date time/timestamp to '.
+                'Can\'t add a value without date time/timestamp to ' .
                 __NAMESPACE__.'\\'.__CLASS__
             );
-        } else {
-            $this->data[Helper::asTimestamp($datetime)] = +$value;
         }
+
+        if (!is_null($value) && !is_scalar($value)) {
+            $value = preg_replace('~[\n\s]+~', ' ', print_r($value, true));
+            throw new \InvalidArgumentException(
+                'A value must be a scalar in ' .
+                __NAMESPACE__.'\\'.__CLASS__.': ' . $value
+            );
+        }
+
+        $this->data[Helper::asTimestamp($datetime)] = +$value;
     }
 
     /**
@@ -226,18 +237,18 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
     /**
      * Return last data entry
      *
-     * @return numeric
+     * @return numeric|null
      */
     public function last()
     {
         $data = array_values($this->data);
-        return array_pop($data);
+        return count($data) ? array_pop($data) : null;
     }
 
     /**
      * Return last data entry
      *
-     * @return numeric
+     * @return self For fluid interface
      */
     public function sort()
     {
