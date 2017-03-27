@@ -230,8 +230,45 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
             return true;
         }
         // Free keys memory
-        $this->keys = null;
+        $this->keys = array();
         return false;
+    }
+
+    /**
+     * Return timestamp of first data entry
+     *
+     * @return numeric|null
+     */
+    public function firstKey()
+    {
+        // Force sort of data
+        $this->rewind();
+        return count($this->data) ? key($this->data) : null;
+    }
+
+    /**
+     * Return first data entry
+     *
+     * @return numeric|null
+     */
+    public function first()
+    {
+        // Force sort of data
+        $this->rewind();
+        return count($this->data) ? current($this->data) : null;
+    }
+
+    /**
+     * Return timestamp of last data entry
+     *
+     * @return numeric|null
+     */
+    public function lastKey()
+    {
+        // Force sort of data
+        $this->rewind();
+        $data = array_keys($this->data);
+        return count($data) ? array_pop($data) : null;
     }
 
     /**
@@ -241,6 +278,8 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
      */
     public function last()
     {
+        // Force sort of data
+        $this->rewind();
         $data = array_values($this->data);
         return count($data) ? array_pop($data) : null;
     }
@@ -362,12 +401,12 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
      * @internal
      * @var int Array position for itterator
      */
-    protected $position;
+    protected $position = 0;
 
     /**
      * @internal
      * @var array Remember timestamp positions
      */
-    protected $keys;
+    protected $keys = array();
 
 }

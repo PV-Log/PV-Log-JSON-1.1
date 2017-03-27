@@ -189,6 +189,42 @@ class SetTest extends \PHPUnit_Framework_TestCase {
     /**
      *
      */
+    public function testGetFirstKey() {
+        $data = array(
+            strtotime('2000-01-01 00:00:00') => 1,
+            strtotime('2000-01-01 00:05:00') => 2
+        );
+        $this->set->set($data);
+        $this->assertEquals(strtotime('2000-01-01 00:00:00'), $this->set->firstKey());
+    }
+
+    /**
+     *
+     */
+    public function testGetFirstValue() {
+        $data = array(
+            strtotime('2000-01-01 00:00:00') => 1,
+            strtotime('2000-01-01 00:05:00') => 2
+        );
+        $this->set->set($data);
+        $this->assertEquals(1, $this->set->first());
+    }
+
+    /**
+     *
+     */
+    public function testGetLastKey() {
+        $data = array(
+            strtotime('2000-01-01 00:00:00') => 1,
+            strtotime('2000-01-01 00:05:00') => 2
+        );
+        $this->set->set($data);
+        $this->assertEquals(strtotime('2000-01-01 00:05:00'), $this->set->lastKey());
+    }
+
+    /**
+     *
+     */
     public function testGetLastValue() {
         $data = array(
             strtotime('2000-01-01 00:00:00') => 1,
