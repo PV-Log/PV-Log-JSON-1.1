@@ -67,7 +67,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * Add measuring value
+     * Set first measuring value or multiple measuring values
      *
      * @param  array|numeric $data Measuring value
      * @return self For fluid interface
@@ -285,7 +285,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
     }
 
     /**
-     * Return last data entry
+     * Sort data by timestamp
      *
      * @return self For fluid interface
      */
