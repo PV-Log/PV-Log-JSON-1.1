@@ -23,9 +23,12 @@
     </testsuites>
 
     <filter>
+        <whitelist processUncoveredFilesFromWhitelist="true">
+            <directory suffix=".php">./src</directory>
+        </whitelist>
         <blacklist>
             <directory suffix=".php">./tests</directory>
-            <directory suffix=".php">vendor</directory>
+            <directory suffix=".php">./vendor</directory>
             <file>src/Channel.template.php</file>
         </blacklist>
     </filter>
