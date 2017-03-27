@@ -163,7 +163,7 @@
 				<b>License:</b>
 				<a href="http://opensource.org/licenses/MIT">MIT License (MIT)</a><br>
 				<b>Author:</b>
-				Knut Kohl <a href="&#x6d;&#x61;&#x69;&#108;&#116;&#111;:&#x6b;&#x6f;&#x68;&#108;&#64;&#116;o&#x70;&#x35;&#x30;&#45;&#115;&#111;l&#x61;&#x72;&#x2e;&#100;&#101;">&#x6b;&#x6f;&#x68;&#108;&#64;&#116;o&#x70;&#x35;&#x30;&#45;&#115;&#111;l&#x61;&#x72;&#x2e;&#100;&#101;</a><br>
+				Knut Kohl <a href="&#x6d;&#97;&#x69;&#x6c;&#116;&#x6f;&#58;&#107;&#x6f;&#104;&#108;&#x40;&#116;&#111;&#x70;&#53;0&#x2d;&#115;&#x6f;&#x6c;&#97;&#x72;&#x2e;&#100;&#x65;">&#107;&#x6f;&#104;&#108;&#x40;&#116;&#111;&#x70;&#53;0&#x2d;&#115;&#x6f;&#x6c;&#97;&#x72;&#x2e;&#100;&#x65;</a><br>
 				<b>Version:</b>
 				PVLog JSON 1.1<br>
 				<b>Since:</b>
@@ -176,7 +176,7 @@
 				Countable<br>
 				<b>Implements:</b>
 				Iterator<br>
-			<b>Located at</b> <a href="source-class-PVLog.Classes.Json.Set.html#19-362" title="Go to source code">Classes/Json/Set.php</a>
+			<b>Located at</b> <a href="source-class-PVLog.Classes.Json.Set.html#19-412" title="Go to source code">Classes/Json/Set.php</a>
 		<br>
 	</div>
 
@@ -196,7 +196,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_add">#</a>
-		<code><a href="source-class-PVLog.Classes.Json.Set.html#53-64" title="Go to source code">add</a>( <span>string <var>$name</var></span>, <span>object <var>$data</var></span> )</code>
+		<code><a href="source-class-PVLog.Classes.Json.Set.html#56-67" title="Go to source code">add</a>( <span>string <var>$name</var></span>, <span>object <var>$data</var></span> )</code>
 
 		<div class="description short">
 			<p>Add measuring value</p>
@@ -243,7 +243,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_set">#</a>
-		<code><a href="source-class-PVLog.Classes.Json.Set.html#66-84" title="Go to source code">set</a>( <span>array|numeric <var>$name</var></span>, <span>object|array <var>$data</var> = <span class="php-keyword1">null</span></span> )</code>
+		<code><a href="source-class-PVLog.Classes.Json.Set.html#69-87" title="Go to source code">set</a>( <span>array|numeric <var>$name</var></span>, <span>object|array <var>$data</var> = <span class="php-keyword1">null</span></span> )</code>
 
 		<div class="description short">
 			<p>Add measuring value</p>
@@ -278,19 +278,121 @@
 		</div>
 		</div></td>
 	</tr>
+	<tr data-order="firstKey" id="_firstKey">
+
+		<td class="attributes"><code>
+			 public 
+
+			numeric|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_firstKey">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Set.html#237-247" title="Go to source code">firstKey</a>( )</code>
+
+		<div class="description short">
+			<p>Return timestamp of first data entry</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Return timestamp of first data entry</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					numeric|null
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="first" id="_first">
+
+		<td class="attributes"><code>
+			 public 
+
+			numeric|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_first">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Set.html#249-259" title="Go to source code">first</a>( )</code>
+
+		<div class="description short">
+			<p>Return first data entry</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Return first data entry</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					numeric|null
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
+	<tr data-order="lastKey" id="_lastKey">
+
+		<td class="attributes"><code>
+			 public 
+
+			numeric|null
+			
+			</code>
+		</td>
+
+		<td class="name"><div>
+		<a class="anchor" href="#_lastKey">#</a>
+		<code><a href="source-class-PVLog.Classes.Json.Set.html#261-272" title="Go to source code">lastKey</a>( )</code>
+
+		<div class="description short">
+			<p>Return timestamp of last data entry</p>
+		</div>
+
+		<div class="description detailed hidden">
+			<p>Return timestamp of last data entry</p>
+
+
+
+				<h4>Returns</h4>
+				<div class="list">
+					numeric|null
+				</div>
+
+
+
+
+		</div>
+		</div></td>
+	</tr>
 	<tr data-order="last" id="_last">
 
 		<td class="attributes"><code>
 			 public 
 
-			numeric
+			numeric|null
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_last">#</a>
-		<code><a href="source-class-PVLog.Classes.Json.Set.html#226-235" title="Go to source code">last</a>( )</code>
+		<code><a href="source-class-PVLog.Classes.Json.Set.html#274-285" title="Go to source code">last</a>( )</code>
 
 		<div class="description short">
 			<p>Return last data entry</p>
@@ -303,7 +405,7 @@
 
 				<h4>Returns</h4>
 				<div class="list">
-					numeric
+					numeric|null
 				</div>
 
 
@@ -317,14 +419,14 @@
 		<td class="attributes"><code>
 			 public 
 
-			numeric
+			<code><a href="class-PVLog.Classes.Json.Set.html">PVLog\Classes\Json\Set</a></code>
 			
 			</code>
 		</td>
 
 		<td class="name"><div>
 		<a class="anchor" href="#_sort">#</a>
-		<code><a href="source-class-PVLog.Classes.Json.Set.html#237-246" title="Go to source code">sort</a>( )</code>
+		<code><a href="source-class-PVLog.Classes.Json.Set.html#287-296" title="Go to source code">sort</a>( )</code>
 
 		<div class="description short">
 			<p>Return last data entry</p>
@@ -337,7 +439,7 @@
 
 				<h4>Returns</h4>
 				<div class="list">
-					numeric
+					<code><a href="class-PVLog.Classes.Json.Set.html">PVLog\Classes\Json\Set</a></code><br>For fluid interface
 				</div>
 
 
@@ -358,7 +460,7 @@
 
 		<td class="name"><div>
 		<a class="anchor" href="#_asArray">#</a>
-		<code><a href="source-class-PVLog.Classes.Json.Set.html#305-344" title="Go to source code">asArray</a>( <span>integer <var>$flags</var> = <span class="php-num">0</span></span> )</code>
+		<code><a href="source-class-PVLog.Classes.Json.Set.html#355-394" title="Go to source code">asArray</a>( <span>integer <var>$flags</var> = <span class="php-num">0</span></span> )</code>
 
 		<div class="description short">
 			<p>Return the whole data (recursive) as array</p>
