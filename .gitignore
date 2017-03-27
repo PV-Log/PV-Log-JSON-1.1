@@ -5,5 +5,3 @@
 composer.lock
 release.sh
 cp2test.sh
-
-Channel.php.tpl

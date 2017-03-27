@@ -99,8 +99,8 @@ abstract class Json
         // Numeric indexed array, ONLY for inverters or strings allowed!
         if (is_array($data) &&
             // HAVE to match also empty arrays!
-            (array_keys($data) == range(0, count($data)-1) ||
-             array_keys($data) == range(1, count($data)))) {
+            (array_keys($data) === range(0, count($data)-1) ||
+             array_keys($data) === range(1, count($data)))) {
             foreach ($data as $value) {
                 $instance[] = new $class($value);
             }
