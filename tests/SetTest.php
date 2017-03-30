@@ -190,9 +190,10 @@ class SetTest extends \PHPUnit_Framework_TestCase {
      *
      */
     public function testGetFirstKey() {
+        // Set in reversed order to test correct sorting
         $data = array(
-            strtotime('2000-01-01 00:00:00') => 1,
-            strtotime('2000-01-01 00:05:00') => 2
+            strtotime('2000-01-01 00:05:00') => 2,
+            strtotime('2000-01-01 00:00:00') => 1
         );
         $this->set->set($data);
         $this->assertEquals(strtotime('2000-01-01 00:00:00'), $this->set->firstKey());
@@ -202,9 +203,10 @@ class SetTest extends \PHPUnit_Framework_TestCase {
      *
      */
     public function testGetFirstValue() {
+        // Set in reversed order to test correct sorting
         $data = array(
-            strtotime('2000-01-01 00:00:00') => 1,
-            strtotime('2000-01-01 00:05:00') => 2
+            strtotime('2000-01-01 00:05:00') => 2,
+            strtotime('2000-01-01 00:00:00') => 1
         );
         $this->set->set($data);
         $this->assertEquals(1, $this->set->first());
@@ -214,9 +216,10 @@ class SetTest extends \PHPUnit_Framework_TestCase {
      *
      */
     public function testGetLastKey() {
+        // Set in reversed order to test correct sorting
         $data = array(
-            strtotime('2000-01-01 00:00:00') => 1,
-            strtotime('2000-01-01 00:05:00') => 2
+            strtotime('2000-01-01 00:05:00') => 2,
+            strtotime('2000-01-01 00:00:00') => 1
         );
         $this->set->set($data);
         $this->assertEquals(strtotime('2000-01-01 00:05:00'), $this->set->lastKey());
@@ -226,9 +229,10 @@ class SetTest extends \PHPUnit_Framework_TestCase {
      *
      */
     public function testGetLastValue() {
+        // Set in reversed order to test correct sorting
         $data = array(
-            strtotime('2000-01-01 00:00:00') => 1,
-            strtotime('2000-01-01 00:05:00') => 2
+            strtotime('2000-01-01 00:05:00') => 2,
+            strtotime('2000-01-01 00:00:00') => 1
         );
         $this->set->set($data);
         $this->assertEquals(2, $this->set->last());

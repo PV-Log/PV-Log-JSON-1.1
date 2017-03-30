@@ -241,8 +241,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
      */
     public function firstKey()
     {
-        // Force sort of data
-        $this->rewind();
+        $this->sort();
         return count($this->data) ? key($this->data) : null;
     }
 
@@ -253,8 +252,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
      */
     public function first()
     {
-        // Force sort of data
-        $this->rewind();
+        $this->sort();
         return count($this->data) ? current($this->data) : null;
     }
 
@@ -265,8 +263,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
      */
     public function lastKey()
     {
-        // Force sort of data
-        $this->rewind();
+        $this->sort();
         $data = array_keys($this->data);
         return count($data) ? array_pop($data) : null;
     }
@@ -278,8 +275,7 @@ class Set extends Json implements \ArrayAccess, \Countable, \Iterator
      */
     public function last()
     {
-        // Force sort of data
-        $this->rewind();
+        $this->sort();
         $data = array_values($this->data);
         return count($data) ? array_pop($data) : null;
     }
